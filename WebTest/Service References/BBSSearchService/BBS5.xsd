@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SZHome.BBSSearch.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SZHome.BBSSearch.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Enums.CommentSortType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="最新回复" />
+      <xs:enumeration value="最新发帖" />
+      <xs:enumeration value="精华帖" />
+      <xs:enumeration value="最多回复" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Enums.CommentSortType" nillable="true" type="tns:Enums.CommentSortType" />
+</xs:schema>

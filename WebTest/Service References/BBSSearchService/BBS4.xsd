@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SZHome.Search.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SZHome.Search.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfBBSCommentEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BBSCommentEntity" nillable="true" type="tns:BBSCommentEntity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBBSCommentEntity" nillable="true" type="tns:ArrayOfBBSCommentEntity" />
+  <xs:complexType name="BBSCommentEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArticleId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Detail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Identity" type="xs:int" />
+      <xs:element minOccurs="0" name="PostTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ProjectId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ReplyNum" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ReplyTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="TagIds" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BBSCommentEntity" nillable="true" type="tns:BBSCommentEntity" />
+</xs:schema>
