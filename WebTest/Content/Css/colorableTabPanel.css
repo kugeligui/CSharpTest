@@ -1,0 +1,19 @@
+/*add by LuoMJ*/
+ul.x-colortab-strip-top{padding-top:1px;background:url(../resources/images/default/tabs/tab-strip-bg.gif) #cedff5 repeat-x bottom;border-bottom:1px solid #8db2e3;}
+ul.x-colortab-strip-bottom{padding-bottom:1px;background:url(../resources/images/default/tabs/tab-strip-btm-bg.gif) #cedff5 repeat-x top;border-top:1px solid #8db2e3;border-bottom:0 none;}
+.x-colortab-strip-top .x-tab-right{background:transparent url(../resources/images/default/tabs/colortabs-sprite-luomj.gif) no-repeat 0 -51px;padding-left:10px;}
+.x-colortab-strip-top .x-tab-left{background:transparent url(../resources/images/default/tabs/colortabs-sprite-luomj.gif) no-repeat right -351px;padding-right:10px;}
+.x-colortab-strip-top .x-tab-strip-inner{background:transparent url(../resources/images/default/tabs/colortabs-sprite-luomj.gif) repeat-x 0 -201px;}
+
+.x-colortab-strip-active{cursor:default;}
+.x-colortab-strip-active span.x-tab-strip-text{cursor:default;color:#15428b;font-weight:bold;}
+.x-colortab-strip-top .x-colortab-strip-active .x-tab-right{margin-bottom:-1px;}
+.x-colortab-strip-top .x-colortab-strip-active .x-tab-right span.x-tab-strip-text{padding-bottom:5px;}
+.x-colortab-strip-bottom .x-colortab-strip-active .x-tab-right{margin-top:-1px;}
+.x-colortab-strip-bottom .x-colortab-strip-active .x-tab-right span.x-tab-strip-text{padding-top:5px;}
+.x-colortab-strip-top .x-colortab-strip-active .x-tab-right{background-position:0 0;}
+.x-colortab-strip-top .x-colortab-strip-active .x-tab-left{background-position:right -301px;}
+.x-colortab-strip-top .x-colortab-strip-active .x-tab-strip-inner{background-position:0 -151px;}
+.x-colortab-strip-bottom .x-colortab-strip-active .x-tab-right{background:url(../resources/images/default/tabs/tab-btm-right-bg.gif) no-repeat bottom left;}
+.x-colortab-strip-bottom .x-colortab-strip-active .x-tab-left{background:url(../resources/images/default/tabs/tab-btm-left-bg.gif) no-repeat bottom right;}
+.x-colortab-strip .x-colortab-strip-active a.x-tab-strip-close{opacity:.8;-moz-opacity:.8;}

@@ -1,0 +1,146 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Css/examples.css" rel="stylesheet" />
+    <link href="~/Content/Css/global.css" rel="stylesheet" />
+    <link href="~/Content/Css/colorableTabPanel.css" rel="stylesheet" />
+    <link href="~/Content/Css/ext-all.css" rel="stylesheet" />
+    <link href="~/Content/Css/style.css" rel="stylesheet" />
+    <title>预约信息核对</title>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" id="ext-gen6" class=" ext-safari">
+    <br>
+    <div id="qx">
+        <b>
+            <span style="font-size:14.0pt;">预约信息核对</span>
+        </b><br />
+    </div>
+    <br>
+    <span id="note" style="font-size: 8.0pt"></span>
+    <br>
+    <form name="bookwebForm" method="post">
+        <input type="hidden" name="bookingInformationOid" value="" id="bookingInformationOid">
+        <input type="hidden" name="bookingCode" value="" id="bookingCode">
+        <input type="hidden" name="registrationAreaOid" value="-1001">
+        <input type="hidden" name="registrationAreaName" value="滨海登记科">
+        <input type="hidden" name="bookingType" value="1">
+        <input type="hidden" name="bookingTypeName" value="二手商品房转移业务类">
+        <input type="hidden" name="bussName" value="二手商品房转移登记（二手房买卖）">
+        <input type="hidden" name="itemNo" value="">
+        <input type="hidden" name="szItemNo" value="30128300369555062213440300">
+        <input type="hidden" name="bookingDateLabel" value="2016-03-17(周四)">
+        <input type="hidden" name="bookingDateStr" value="2016-03-17">
+        <input type="hidden" name="workTimeSoltOid" value="59">
+        <input type="hidden" name="workTimeSoltName" value="10:00-11:00">
+        <input type="hidden" name="proveType" value="00">
+        <input type="hidden" name="proveTypeName" value="不动产登记证明或房地产证">
+        <input type="hidden" name="proveCode" value="200100001">
+        <input type="hidden" name="houseName" value="xx">
+        <input type="hidden" name="personName" value="李生">
+        <input type="hidden" name="certificateType" value="1">
+        <input type="hidden" name="certificateTypeName" value="二代身份证">
+        <input type="hidden" name="certificateNo" value="430426199208110011">
+        <input type="hidden" name="phoneNumber" value="13888888888">
+        <input type="hidden" name="bookingSzAreaOid" value="1">
+        <input type="hidden" name="szAreaName" value="罗湖区">
+
+        <table id="bookingInfoTable" class="myTable" cellpadding="0" cellspacing="0" align="center">
+            <tbody>
+                <tr height="36">
+                    <th colspan="4" height="29">业务信息</th>
+                </tr>
+                <tr id="bookingCodeTr" style="display:none;">
+                    <td class="label" align="right" nowrap="nowrap">预约流水号</td>
+                    <td colspan="3">&nbsp;<font id="bookingCodeTd"></font></td>
+                </tr>
+                <tr>
+                    <td class="label" align="right" nowrap="nowrap" width="10%">业务事项：</td>
+                    <td id="tempItemName" width="15%">&nbsp;二手商品房转移业务类 --- &nbsp;二手商品房转移登记（二手房买卖）</td>
+                    <td class="label" align="right" nowrap="nowrap" width="10%">受理单位：</td>
+                    <td id="unitName" width="15%">&nbsp;深圳市不动产登记中心</td>
+                </tr>
+                <tr height="36">
+                    <th colspan="4" height="29">房地产权利证明</th>
+                </tr>
+                <tr>
+                    <td class="label" align="right" nowrap="nowrap">房地产所在区：</td>
+                    <td><span style="text-align:left">&nbsp;罗湖区</span></td>
+                    <td class="label" align="right" nowrap="nowrap">房地产名称：</td>
+                    <td><span style="text-align:left">&nbsp;xx</span></td>
+                </tr>
+                <tr id="isFlagItem">
+                    <td class="label" align="right" nowrap="nowrap">权属证明类型：</td>
+                    <td id="proveTypeName">&nbsp;不动产登记证明或房地产证</td>
+
+                    <td class="label" align="right" nowrap="nowrap">权属证明编号：</td>
+                    <td id="proveCode">&nbsp;200100001</td>
+                </tr>
+                <tr height="31">
+                    <th colspan="4" height="29">预约人</th>
+                </tr>
+                <tr>
+                    <td class="label" align="right" nowrap="nowrap">姓名：</td>
+                    <td id="personName">&nbsp;李生</td>
+                    <td class="label" align="right" nowrap="nowrap">手机号码：</td>
+                    <td id="phoneNumber">&nbsp;13888888888</td>
+                </tr>
+                <tr>
+                    <td class="label" align="right" nowrap="nowrap">证件类型：</td>
+                    <td id="certificateTypeName">&nbsp;二代身份证</td>
+                    <td class="label" align="right" nowrap="nowrap">证件号码：</td>
+                    <td id="certificateNo">&nbsp;430426199208110011</td>
+                </tr>
+                <tr height="31">
+                    <th colspan="4" height="29">办理登记点和预约时间信息</th>
+                </tr>
+                <tr>
+                    <td class="label" align="right" nowrap="nowrap">办理登记点：</td>
+                    <td id="registrationAreaName" colspan="3">&nbsp;滨海登记科</td>
+                </tr>
+                <tr>
+                    <td class="label" align="right" nowrap="nowrap">预约日期：</td>
+                    <td>&nbsp;2016-03-17(周四)</td>
+                    <td class="label" align="right" nowrap="nowrap">预约时段：</td>
+                    <td>&nbsp;10:00-11:00</td>
+                </tr>
+                <tr height="31">
+                    <th colspan="4" height="29">验证码</th>
+                </tr>
+                <tr id="verificationCodeTr">
+                    <td class="label" align="right" nowrap="nowrap">验证码</td>
+                    <td height="29" class="fromStyle" colspan="3">
+                        <div style="display:inline">
+                            <div style="float:left">
+                                <input type="text" id="verificationcodereg" name="verificationcodereg" tabindex="3" maxlength="3" class="t_input" value="" size="10" style="ime-mode:disabled;margin:5;" onblur="checkuserverificationcode(this);" onkeypress="return (/[\d-]/.test(String.fromCharCode(event.keyCode)));">
+                            </div>
+                            <div id="usvcmsg" style="float:left"></div>
+                            <input type="hidden" id="verificationcoderegflag" value="">
+                            <div onclick="refreshvc();" style="cursor: pointer;float:left;">
+                                <img id="verificationcodeimg" src="./预约信息核对_files/createBookWeb.do">
+                            </div>
+                            <div style="float:left">
+                                <span style="font-size:13px;">
+                                    请输入左侧算式结果，如"五加二等于？"输入7。<br><a herf="#" onclick="refreshvc();"><font color="blue">看不清？换一个。</font></a>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div id="cancelBtnTr" align="center">
+            <input type="button" class="buttonTow" name="bt1" value="返回" onclick="doCancel()">
+            <input id="submitBtn" type="button" class="buttonTow" name="bt1" value="下一步" onclick="goSubmit()">
+        </div>
+        <br>
+    </form>
+</body>
+</html>

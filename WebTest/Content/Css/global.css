@@ -1,0 +1,183 @@
+.form {
+	BACKGROUND-IMAGE: url(../../images/table_16x16.gif)! important
+}
+.approve{
+	BACKGROUND-IMAGE: url(../../images/check-in_16x16.gif)! important
+}
+.cancelapprove{
+	BACKGROUND-IMAGE: url(../../images/check-out_16x16.gif)! important
+}
+.define{
+	BACKGROUND-IMAGE: url(../../images/accept.png)! important
+}
+.special{
+	BACKGROUND-IMAGE: url(../../images/comment_edit.png)! important
+}
+.purge{
+	BACKGROUND-IMAGE: url(../../images/database_field_(delete)_16x16.gif)! important
+}
+.unitinner{
+	BACKGROUND-IMAGE: url(../../images/group_link.png)! important
+}
+.unitouter{
+	BACKGROUND-IMAGE: url(../../images/group_go.png)! important
+}
+.offenrol{
+	BACKGROUND-IMAGE: url(../../images/drive_edit.png)! important
+}
+.view{
+	BACKGROUND-IMAGE: url(../../images/application_view_detail.png)! important
+}
+.mod{
+	BACKGROUND-IMAGE: url(../../images/note_edit.png)! important
+}
+.del{
+	BACKGROUND-IMAGE: url(../../images/delete.png)! important
+}
+.editPerson{
+	BACKGROUND-IMAGE: url(../../images/user8_(edit)_16x16.gif)! important
+}
+.viewPerson{
+	BACKGROUND-IMAGE: url(../../images/user3_16x16.gif)! important
+}
+.print{
+	BACKGROUND-IMAGE: url(../../images/img/printer.gif)! important
+}
+.add{
+	BACKGROUND-IMAGE: url(../../images/add.png)! important
+}
+.change{
+	BACKGROUND-IMAGE: url(../../images/arrow_switch.png)! important
+}
+.recall{
+	BACKGROUND-IMAGE: url(../../images/arrow_undo.png)! important
+}
+.set{
+	BACKGROUND-IMAGE: url(../../images/cog.png)! important
+}
+.agree{
+	BACKGROUND-IMAGE: url(../../images/note_go.png)! important
+}
+.disaccord{
+	BACKGROUND-IMAGE: url(../../images/note_error.png)! important
+}
+.drop{
+	BACKGROUND-IMAGE: url(../../images/note_delete.png)! important
+}
+.bookdefine{
+	BACKGROUND-IMAGE: url(../../images/book_open.png)! important
+}
+.close{
+	BACKGROUND-IMAGE: url(../../images/cancel.png)! important
+}
+.query{
+	BACKGROUND-IMAGE: url(../../images/zoom.png)! important
+}
+.collate{
+	BACKGROUND-IMAGE: url(../../images/comments_add.png)! important
+}
+.treeroot{
+	BACKGROUND-IMAGE: url(../../images/img/house.gif)! important
+}
+.blist {
+    background-image: url(../../images/list-items.gif) !important;
+}
+.bmenu {
+    background-image: url(../../images/menu-show.gif) !important;
+}
+.pay{
+	BACKGROUND-IMAGE: url(../../images/pay_16x16.gif)! important
+}
+.peopleout {
+	background-image: url(../../images/user2_(delete)_16x16.gif) !important;
+}
+.peoplein {
+	background-image: url(../../images/user3_16x16.gif) !important;
+}
+.personMenu {
+	background-image: url(../../images/img/group.gif) !important;
+}
+.x-grid-color-change{
+	background-color: #ADD8E6
+}
+.x-grid-color-delete{
+	background-color: #cdcdcd ! important
+}
+.x-grid-font-color-green div{
+	color: #008000 
+}
+.x-grid-color-nizeng{
+	background-color: #60C0C0 ! important
+}
+.x-grid-color-danleibian{
+	background-color: #FFCCFF ! important
+}
+.x-grid-color-add{
+	background-color: #FFB6C1 ! important
+}
+.submission{
+	BACKGROUND-IMAGE: url(../../images/buttonImages/submission.gif)! important
+}
+.store{
+	BACKGROUND-IMAGE: url(../../images/buttonImages/store.gif)! important
+}
+.move{
+	BACKGROUND-IMAGE: url(../../images/book_next.gif)! important
+}
+.check-in{
+	BACKGROUND-IMAGE: url(../../images/check-in_16x16.gif)! important
+}
+.check-out{
+	BACKGROUND-IMAGE: url(../../images/check-out_16x16.gif)! important
+}
+.db_refresh{
+	BACKGROUND-IMAGE: url(../../images/img/database_refresh.gif)! important
+}
+.loading {
+	background-image:url(../../ext/resources/images/default/tree/loading.gif) !important;
+}
+.lockopen{
+	background-image: url(../../images/lock_open.png)!important;
+}
+.lock{
+	background-image: url(../../images/lock.png) !important;
+}
+.lockadd{
+	background-image: url(../../images/lock_add.png)!important;
+}
+.lockdel{
+	background-image: url(../../images/lock_delete.png) !important;
+}
+.clean_up2{
+	BACKGROUND-IMAGE: url(../../images/buttonImages/clean_up2.gif) !important;
+}
+.wage-budget-menu{
+	background-image: url(../../images/money_yen.png) !important;
+}
+.wage-budget{
+	background-image: url(../../images/money.png) !important;
+}
+.cancel-wage-budget{
+	background-image: url(../../images/money_delete.png) !important;
+}
+.unit{
+	background-image: url(../../images/img/house.gif)!important;
+}
+.subunit{
+	background-image: url(../../images/xyTree/6.gif)!important;
+}
+.org{
+	background-image: url(../../images/organ.jpg) !important;
+}
+.suborg{
+	background-image: url(../../images/xyTree/3.gif)!important;
+}
+.cityarea{
+	background-image: url(../../images/xyTree/1.gif)!important;
+}
+.category{
+	background-image: url(../../images/xyTree/2.gif)!important;
+}
+.unitkind{
+	background-image: url(../../images/xyTree/3.gif)!important;
+}

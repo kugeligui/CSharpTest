@@ -61,6 +61,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="SZHomeDLL">
+      <HintPath>..\..\dll\szhomedll\SZHomeDLL.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -95,6 +98,74 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Css\colorableTabPanel.css" />
+    <Content Include="Content\Css\common.css" />
+    <Content Include="Content\Css\examples.css" />
+    <Content Include="Content\Css\ext-all.css" />
+    <Content Include="Content\Css\global.css" />
+    <Content Include="Content\Css\govmain.css" />
+    <Content Include="Content\Css\style.css" />
+    <Content Include="Content\Html\业务申办申请信息表.html" />
+    <Content Include="Content\Html\业务申办申请信息表_files\1.html" />
+    <Content Include="Content\Html\业务申办申请信息表_files\BaseInfoPanel.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\bookInformation.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\bookingInformationDwr.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\bookingLockDwr.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\bookingTypeDwr.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\bookweb.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\bookWebActionDwr.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\colorableTabPanel.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\colorableTabPanel.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\common.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\common.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\commonbooking.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\common_validator.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\cookieOperation.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\DataGridPanel.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\Date.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\engine.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\examples.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\examples.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ext-all.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ext-all.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ext-base%281%29.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ext-base.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ext-lang-zh_CN-GBK-min.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\Format.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\global.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\govmain.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\GridPanelExtend.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\input_date.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\input_filter.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\jquery-1.1.2.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\meizz_date.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ModalDialogWindow.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\pageSizePlugin.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\RadioGroup.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\ResetPageNumToolbar.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\RowExpander.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\SearchSelectField.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\shuxing.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\style.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\TabPanelExtend.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\tag.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\UnitGridPanelExtend.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\util.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\WdatePicker.css" />
+    <Content Include="Content\Html\业务申办申请信息表_files\WdatePicker.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\workDayDwr.js" />
+    <Content Include="Content\Html\业务申办申请信息表_files\workTimeSoltDwr.js" />
+    <Content Include="Content\Lib\Jquery-1.12.0\jquery-1.12.0.min.js" />
+    <Content Include="Content\Lib\layer\extend\layer.ext.js" />
+    <Content Include="Content\Lib\layer\layer.js" />
+    <Content Include="Content\Lib\layer\skin\default\icon-ext.png" />
+    <Content Include="Content\Lib\layer\skin\default\icon.png" />
+    <Content Include="Content\Lib\layer\skin\default\loading-0.gif" />
+    <Content Include="Content\Lib\layer\skin\default\loading-1.gif" />
+    <Content Include="Content\Lib\layer\skin\default\loading-2.gif" />
+    <Content Include="Content\Lib\layer\skin\layer.css" />
+    <Content Include="Content\Lib\layer\skin\layer.ext.css" />
+    <Content Include="Content\Lib\Module\common_validator.js" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
     <None Include="Properties\PublishProfiles\iis.pubxml" />
@@ -129,7 +200,6 @@
     <Content Include="Service References\BBSSearchService\WebTest.BBSSearchService.CommentTitleSearchWithTagIdsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Views\Test\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -138,6 +208,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookingDateInfo.cs" />
+    <Compile Include="Models\BookingInfo.cs" />
+    <Compile Include="Models\BookingTimeInfo.cs" />
+    <Compile Include="Models\Registration.cs" />
+    <Compile Include="Models\RegistrationInfo.cs" />
+    <Compile Include="Models\ResultJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BBSSearchService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -154,6 +230,8 @@
     <None Include="Service References\BBSSearchService\BBS1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Verify.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,13 +241,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BBSSearchService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d35ec83f-e51f-4c82-bebd-1b50a5add908}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

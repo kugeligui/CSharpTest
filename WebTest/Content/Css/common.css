@@ -1,0 +1,110 @@
+.myTable,.myTable table{
+	background-color:#E3F4FB;
+	border-color:#ADC9EE;
+	border-bottom: solid #ADC9EE 1px;
+	border-right:solid #ADC9EE 1px;
+	width:100%;
+	text-align:center;
+
+}
+.myTable td,.myTable th{
+	padding-left:2px;
+	padding-right:2px;
+	border-top:solid #ADC9EE 1px;
+	border-left:solid #ADC9EE 1px;
+	word-break:break-all;
+}
+
+.error_label{
+	color: red;
+	font-size: 12px;
+}
+
+.myTable th{
+	font-weight: 700;
+}
+.myTable .text{
+	width: 100%;
+}
+
+.fromStyle{
+	text-align:left;
+	padding-left:5px;
+}
+.label{
+	background:#AEE6FE;
+	white-space:nowrap;
+}
+
+
+BODY {
+  font-family: verdana, arial, sans-serif;
+  font-size: 8pt;
+  background: write;
+  color: #000000;
+}
+
+TABLE, TD, LI, P, UL, OL, INPUT,TEXTAREA, A, div.tabs th, div.tabs td  {
+  font-family: verdana, arial, sans-serif;
+  font-size: 8pt;
+  color: #000000;  
+}
+
+a,a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.select_width{
+  font-family: verdana, arial, sans-serif;
+  font-size: 8pt;
+  color: #000000;
+  width: 160px
+}
+
+.row1 { background: #FFFFFF; }
+.row2 { background: #EDEDED; }
+
+/* form table */
+.formTable {
+  border-top: 1px solid #9C9A9C;
+  border-left: 1px solid #9C9A9C;
+}
+.formTable th {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-align: left;
+  color: #000000;
+  font-weight: bold;
+  border-right: 1px solid #9C9A9C;
+  border-bottom: 1px solid #9C9A9C;
+  background-color: #ecf5fe;
+  height: 25px;
+}
+.formTable th a:link, .formTable th a:visited {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+.formTable td {
+  background-image: url(../../images/dot-h.gif);
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  border-right: 1px solid #9C9A9C;
+  padding-top:10px;
+  padding-left:5px;
+}
+.formTable th a:link, .formTable th a:visited {
+  color: #FFF;
+}
+
+.formLabel {
+  text-align: right !important;
+  width: 10%;
+  background-color: #CBD9EA !important;
+  padding-right: 10px;
+}

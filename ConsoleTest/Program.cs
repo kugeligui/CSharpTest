@@ -72,52 +72,55 @@ namespace ConsoleTest
             {
                 Console.WriteLine(area.ToString());
                 IEnumerable<Registration> registrationList = GetRegistration(area);
-                //遍历获取到的登记点（返回的是集合）
-                foreach (var reg in registrationList)
+                if (registrationList != null)
                 {
-                    //遍历获取到的登记点信息
-                    foreach (var registeration in reg.labelList)
+                    //遍历获取到的登记点（返回的是集合）
+                    foreach (var reg in registrationList)
                     {
-                        int registrationId = registeration.value;
-                        Console.WriteLine("办理登记点：" + registeration.label);
-                        Console.WriteLine("登记点地址：" + (RegisterAddress.ContainsKey(registrationId) ? RegisterAddress[registrationId] : ""));
+                        //遍历获取到的登记点信息
+                        foreach (var registeration in reg.labelList)
+                        {
+                            int registrationId = registeration.value;
+                            Console.WriteLine("办理登记点：" + registeration.label);
+                            Console.WriteLine("登记点地址：" + (RegisterAddress.ContainsKey(registrationId) ? RegisterAddress[registrationId] : ""));
 
-                        string bookInfo = GetBookingInfoListByRegistrationAreaOid(registrationId);
-                        IEnumerable<BookingDateInfo> bookingDateList = GetWorkDateListByRegistrationAreaOid(registrationId);
-                        IEnumerable<BookingTimeInfo> bookingTimeList = GetWorkTimeListByRegistrationAreaOid(registrationId);
-                        Console.Write("预约时段\t");
-                        foreach (var date in bookingDateList)
-                        {
-                            Console.Write(date.workDay.Substring(5, 5).Replace("-", "月") + "\t");
-                        }
-                        Console.WriteLine();
-                        foreach (var time in bookingTimeList)
-                        {
-                            Console.Write(time.workTimeSoltName + "\t");
+                            string bookInfo = GetBookingInfoListByRegistrationAreaOid(registrationId);
+                            IEnumerable<BookingDateInfo> bookingDateList = GetWorkDateListByRegistrationAreaOid(registrationId);
+                            IEnumerable<BookingTimeInfo> bookingTimeList = GetWorkTimeListByRegistrationAreaOid(registrationId);
+                            Console.Write("预约时段\t");
                             foreach (var date in bookingDateList)
                             {
-                                string timeStr = date.workDay.Substring(0, 10) + "_" + time.workTimeSoltName;
-                                int position = bookInfo.IndexOf(timeStr);
-                                int bookCount = 0;
-                                if (position != -1)
-                                {
-                                    int start = bookInfo.IndexOf("\"", position - 9) + 1;
-                                    int end = bookInfo.IndexOf("\"", position - 7);
-                                    bookCount = Convert.ToInt32(bookInfo.Substring(start, end - start));
-                                }
-                                if (DateTime.Now > DateTime.Parse(date.workDay.Substring(0, 10) + " " + time.workTimeSoltName.Substring(0, 5)))
-                                {
-                                    Console.Write("已结束\t");
-                                }
-                                else
-                                {
-                                    Console.Write(string.Format("({0}/{1})\t", bookCount, time.bookCount));
-                                }
+                                Console.Write(date.workDay.Substring(5, 5).Replace("-", "月") + "\t");
                             }
                             Console.WriteLine();
+                            foreach (var time in bookingTimeList)
+                            {
+                                Console.Write(time.workTimeSoltName + "\t");
+                                foreach (var date in bookingDateList)
+                                {
+                                    string timeStr = date.workDay.Substring(0, 10) + "_" + time.workTimeSoltName;
+                                    int position = bookInfo.IndexOf(timeStr);
+                                    int bookCount = 0;
+                                    if (position != -1)
+                                    {
+                                        int start = bookInfo.IndexOf("\"", position - 9) + 1;
+                                        int end = bookInfo.IndexOf("\"", position - 7);
+                                        bookCount = Convert.ToInt32(bookInfo.Substring(start, end - start));
+                                    }
+                                    if (DateTime.Now > DateTime.Parse(date.workDay.Substring(0, 10) + " " + time.workTimeSoltName.Substring(0, 5)))
+                                    {
+                                        Console.Write("已结束\t");
+                                    }
+                                    else
+                                    {
+                                        Console.Write(string.Format("({0}/{1})\t", bookCount, time.bookCount));
+                                    }
+                                }
+                                Console.WriteLine();
+                            }
                         }
+                        Console.WriteLine();
                     }
-                    Console.WriteLine();
                 }
                 Console.WriteLine();
             }
