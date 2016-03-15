@@ -3,6 +3,11 @@
     public class BookingInfo
     {
         /// <summary>
+        /// 日期标签
+        /// </summary>
+        public string bookingDateLabel { get; set; }
+
+        /// <summary>
         /// 日期
         /// </summary>
         public string bookingDate { get; set; }

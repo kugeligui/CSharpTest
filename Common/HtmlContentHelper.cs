@@ -14,9 +14,47 @@ namespace Common
         /// <param name="html">html代码</param>
         /// <param name="id">控件id</param>
         /// <returns></returns>
+        public static string GetTdTextById(string html, string id)
+        {
+            Regex regex = new Regex("<[^>]+id=\"" + id + "\"[^>]*>([^<]+)</td>", RegexOptions.IgnoreCase);
+            Match match = regex.Match(html);
+            if (match.Success)
+            {
+                return match.Groups[1].Value.Replace("&nbsp;", "");
+            }
+            else {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 根据id获取值
+        /// </summary>
+        /// <param name="html">html代码</param>
+        /// <param name="name">控件名</param>
+        /// <returns></returns>
+        public static string GetValueByName(string html, string name)
+        {
+            Regex regex = new Regex("<[^>]+name=\"" + name + "\"[^>]*value=\"([^>]*)\">", RegexOptions.IgnoreCase);
+            Match match = regex.Match(html);
+            if (match.Success)
+            {
+                return match.Groups[1].Value.Replace("&nbsp;", "");
+            }
+            else {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 根据id获取值
+        /// </summary>
+        /// <param name="html">html代码</param>
+        /// <param name="name">控件id</param>
+        /// <returns></returns>
         public static string GetValueById(string html, string id)
         {
-            Regex regex = new Regex("<[^>]+id=\"" + id + "\"[^>]*>([^<]+)</td>");
+            Regex regex = new Regex("<[^>]+id=\"" + id + "\"[^>]*value=\"([^>]*)\">", RegexOptions.IgnoreCase);
             Match match = regex.Match(html);
             if (match.Success)
             {

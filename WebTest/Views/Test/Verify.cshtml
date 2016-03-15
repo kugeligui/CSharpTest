@@ -1,4 +1,5 @@
-﻿
+﻿@model WebTest.Models.VerfyInfo
+
 @{
     Layout = null;
 }
@@ -14,6 +15,41 @@
     <link href="~/Content/Css/ext-all.css" rel="stylesheet" />
     <link href="~/Content/Css/style.css" rel="stylesheet" />
     <title>预约信息核对</title>
+    <script src="~/Content/Lib/Jquery-1.12.0/jquery-1.12.0.min.js"></script>
+    <script src="~/Content/Lib/layer/layer.js"></script>
+    <script type="text/javascript">
+        //刷新验证码
+        function refreshvc() {
+            $.ajax({
+                url: "GetVerifyCode",
+                type: "post",
+                success: function (result) {
+                    if (result.StatusCode == 0) {
+                        $("#verificationcodeimg").attr("src", "data:image/jpeg;base64," + result.Data);
+                    }
+                }
+            });
+
+            //$("#verificationcodeimg").attr("src", "http://onlinebook.szreorc.com:8888/onlinebook/createBookWeb.do?method=getVerificationcode&vcdemander=userregister&time=" + new Date().toString());
+        }
+
+        //提交
+        function submitPost() {
+            if ($("#verificationcodereg").val() == "") {
+                layer.msg("请输入验证码");
+                $("#verificationcodereg").focus();
+                return;
+            }
+            var layerConfirm = layer.confirm('请确认申请表信息填写无误，确认后不能再修改，现在是否继续确认？', {
+                btn: ['是', '否']
+            }, function () {
+                $("#bookwebForm").submit();
+                $("#submitBtn").attr("disabled", "disabled");
+            }, function () {
+                layer.close(layerConfirm);
+            });
+        }
+    </script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" id="ext-gen6" class=" ext-safari">
     <br>
@@ -25,44 +61,39 @@
     <br>
     <span id="note" style="font-size: 8.0pt"></span>
     <br>
-    <form name="bookwebForm" method="post">
+    <form name="bookwebForm" id="bookwebForm" method="post" action="CreateBooking">
         <input type="hidden" name="bookingInformationOid" value="" id="bookingInformationOid">
         <input type="hidden" name="bookingCode" value="" id="bookingCode">
-        <input type="hidden" name="registrationAreaOid" value="-1001">
-        <input type="hidden" name="registrationAreaName" value="滨海登记科">
-        <input type="hidden" name="bookingType" value="1">
-        <input type="hidden" name="bookingTypeName" value="二手商品房转移业务类">
-        <input type="hidden" name="bussName" value="二手商品房转移登记（二手房买卖）">
-        <input type="hidden" name="itemNo" value="">
-        <input type="hidden" name="szItemNo" value="30128300369555062213440300">
-        <input type="hidden" name="bookingDateLabel" value="2016-03-17(周四)">
-        <input type="hidden" name="bookingDateStr" value="2016-03-17">
-        <input type="hidden" name="workTimeSoltOid" value="59">
-        <input type="hidden" name="workTimeSoltName" value="10:00-11:00">
-        <input type="hidden" name="proveType" value="00">
-        <input type="hidden" name="proveTypeName" value="不动产登记证明或房地产证">
-        <input type="hidden" name="proveCode" value="200100001">
-        <input type="hidden" name="houseName" value="xx">
-        <input type="hidden" name="personName" value="李生">
-        <input type="hidden" name="certificateType" value="1">
-        <input type="hidden" name="certificateTypeName" value="二代身份证">
-        <input type="hidden" name="certificateNo" value="430426199208110011">
-        <input type="hidden" name="phoneNumber" value="13888888888">
-        <input type="hidden" name="bookingSzAreaOid" value="1">
-        <input type="hidden" name="szAreaName" value="罗湖区">
-
+        <input type="hidden" name="registrationAreaOid" value="@Model.registrationAreaOid">
+        <input type="hidden" name="registrationAreaName" value="@Model.registrationAreaName">
+        <input type="hidden" name="bookingType" value="@Model.bookingType">
+        <input type="hidden" name="bookingTypeName" value="@Model.bookingTypeName">
+        <input type="hidden" name="bussName" value="@Model.bussName">
+        <input type="hidden" name="itemNo" value="@Model.itemNo">
+        <input type="hidden" name="szItemNo" value="@Model.szItemNo">
+        <input type="hidden" name="bookingDateLabel" value="@Model.bookingDateLabel">
+        <input type="hidden" name="bookingDateStr" value="@Model.bookingDateStr">
+        <input type="hidden" name="workTimeSoltOid" value="@Model.workTimeSoltOid">
+        <input type="hidden" name="workTimeSoltName" value="@Model.workTimeSoltName">
+        <input type="hidden" name="proveType" value="@Model.proveType">
+        <input type="hidden" name="proveTypeName" value="@Model.proveTypeName">
+        <input type="hidden" name="proveCode" value="@Model.proveCode">
+        <input type="hidden" name="houseName" value="@Model.houseName">
+        <input type="hidden" name="personName" value="@Model.personName">
+        <input type="hidden" name="certificateType" value="@Model.certificateType">
+        <input type="hidden" name="certificateTypeName" value="@Model.certificateTypeName">
+        <input type="hidden" name="certificateNo" value="@Model.certificateNo">
+        <input type="hidden" name="phoneNumber" value="@Model.phoneNumber">
+        <input type="hidden" name="bookingSzAreaOid" value="@Model.bookingSzAreaOid">
+        <input type="hidden" name="szAreaName" value="@Model.szAreaName">
         <table id="bookingInfoTable" class="myTable" cellpadding="0" cellspacing="0" align="center">
             <tbody>
                 <tr height="36">
                     <th colspan="4" height="29">业务信息</th>
                 </tr>
-                <tr id="bookingCodeTr" style="display:none;">
-                    <td class="label" align="right" nowrap="nowrap">预约流水号</td>
-                    <td colspan="3">&nbsp;<font id="bookingCodeTd"></font></td>
-                </tr>
                 <tr>
                     <td class="label" align="right" nowrap="nowrap" width="10%">业务事项：</td>
-                    <td id="tempItemName" width="15%">&nbsp;二手商品房转移业务类 --- &nbsp;二手商品房转移登记（二手房买卖）</td>
+                    <td id="tempItemName" width="15%">&nbsp;@Model.bookingTypeName --- &nbsp;@Model.bussName</td>
                     <td class="label" align="right" nowrap="nowrap" width="10%">受理单位：</td>
                     <td id="unitName" width="15%">&nbsp;深圳市不动产登记中心</td>
                 </tr>
@@ -71,44 +102,44 @@
                 </tr>
                 <tr>
                     <td class="label" align="right" nowrap="nowrap">房地产所在区：</td>
-                    <td><span style="text-align:left">&nbsp;罗湖区</span></td>
+                    <td><span style="text-align:left">&nbsp;@Model.szAreaName</span></td>
                     <td class="label" align="right" nowrap="nowrap">房地产名称：</td>
-                    <td><span style="text-align:left">&nbsp;xx</span></td>
+                    <td><span style="text-align:left">&nbsp;@Model.houseName</span></td>
                 </tr>
                 <tr id="isFlagItem">
                     <td class="label" align="right" nowrap="nowrap">权属证明类型：</td>
-                    <td id="proveTypeName">&nbsp;不动产登记证明或房地产证</td>
+                    <td id="proveTypeName">&nbsp;@Model.proveTypeName</td>
 
                     <td class="label" align="right" nowrap="nowrap">权属证明编号：</td>
-                    <td id="proveCode">&nbsp;200100001</td>
+                    <td id="proveCode">&nbsp;@Model.proveCode</td>
                 </tr>
                 <tr height="31">
                     <th colspan="4" height="29">预约人</th>
                 </tr>
                 <tr>
                     <td class="label" align="right" nowrap="nowrap">姓名：</td>
-                    <td id="personName">&nbsp;李生</td>
+                    <td id="personName">&nbsp;@Model.personName</td>
                     <td class="label" align="right" nowrap="nowrap">手机号码：</td>
-                    <td id="phoneNumber">&nbsp;13888888888</td>
+                    <td id="phoneNumber">&nbsp;@Model.phoneNumber</td>
                 </tr>
                 <tr>
                     <td class="label" align="right" nowrap="nowrap">证件类型：</td>
-                    <td id="certificateTypeName">&nbsp;二代身份证</td>
+                    <td id="certificateTypeName">&nbsp;@Model.certificateTypeName</td>
                     <td class="label" align="right" nowrap="nowrap">证件号码：</td>
-                    <td id="certificateNo">&nbsp;430426199208110011</td>
+                    <td id="certificateNo">&nbsp;@Model.certificateNo</td>
                 </tr>
                 <tr height="31">
                     <th colspan="4" height="29">办理登记点和预约时间信息</th>
                 </tr>
                 <tr>
                     <td class="label" align="right" nowrap="nowrap">办理登记点：</td>
-                    <td id="registrationAreaName" colspan="3">&nbsp;滨海登记科</td>
+                    <td id="registrationAreaName" colspan="3">&nbsp;@Model.registrationAreaName</td>
                 </tr>
                 <tr>
                     <td class="label" align="right" nowrap="nowrap">预约日期：</td>
-                    <td>&nbsp;2016-03-17(周四)</td>
+                    <td>&nbsp;@Model.bookingDateLabel</td>
                     <td class="label" align="right" nowrap="nowrap">预约时段：</td>
-                    <td>&nbsp;10:00-11:00</td>
+                    <td>&nbsp;@Model.workTimeSoltName</td>
                 </tr>
                 <tr height="31">
                     <th colspan="4" height="29">验证码</th>
@@ -118,12 +149,13 @@
                     <td height="29" class="fromStyle" colspan="3">
                         <div style="display:inline">
                             <div style="float:left">
-                                <input type="text" id="verificationcodereg" name="verificationcodereg" tabindex="3" maxlength="3" class="t_input" value="" size="10" style="ime-mode:disabled;margin:5;" onblur="checkuserverificationcode(this);" onkeypress="return (/[\d-]/.test(String.fromCharCode(event.keyCode)));">
+                                <input type="text" id="verificationcodereg" name="verificationcodereg" tabindex="3" maxlength="3" class="t_input" value="" size="10" style="ime-mode:disabled;margin:5px;" onkeypress="return (/[\d-]/.test(String.fromCharCode(event.keyCode)));">
                             </div>
                             <div id="usvcmsg" style="float:left"></div>
                             <input type="hidden" id="verificationcoderegflag" value="">
                             <div onclick="refreshvc();" style="cursor: pointer;float:left;">
-                                <img id="verificationcodeimg" src="./预约信息核对_files/createBookWeb.do">
+                                <img id="verificationcodeimg" src="data:image/jpeg;base64,@ViewBag.vCodeBase64">
+
                             </div>
                             <div style="float:left">
                                 <span style="font-size:13px;">
@@ -138,7 +170,7 @@
         <br>
         <div id="cancelBtnTr" align="center">
             <input type="button" class="buttonTow" name="bt1" value="返回" onclick="doCancel()">
-            <input id="submitBtn" type="button" class="buttonTow" name="bt1" value="下一步" onclick="goSubmit()">
+            <input id="submitBtn" type="button" class="buttonTow" name="bt1" value="下一步" onclick="submitPost()">
         </div>
         <br>
     </form>

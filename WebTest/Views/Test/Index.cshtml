@@ -74,21 +74,22 @@
                     html += '</tr>';
 
                     //预约时间
-                    $.each(data.bookingTimeInfo, function (i, bookingTime) {
+                    $.each(data.bookingTimeInfo, function (i, n) {
                         html += '<tr>';
-                        html += '<td class="label">' + bookingTime.workTimeSoltName + '</td>';
+                        html += '<td class="label">' + n.workTimeSoltName + '</td>';
                         //预约信息
                         var bookingTimeInfo = data.bookingInfo[i];
                         $.each(bookingTimeInfo, function (j, bookingInfo) {
                             var bookingDate = bookingInfo.bookingDate;
                             var bookingTime = bookingInfo.bookingTime;
-                            var bookingTimeId = bookingTime.workTimeSoltOid;
+                            var bookingTimeId = n.workTimeSoltOid;
+                            console.log(bookingTime);
                             if (bookingInfo.isEnd) {
                                 html += '<td><input type="radio" name="calendar" disabled="disabled"><span><font color="#999999">已结束</font></span></td></td>';
                             } else if (bookingInfo.bookedCount >= bookingInfo.bookCount) {
                                 html += '<td><input type="radio" name="calendar" disabled="disabled" value="' + bookingDate + '_' + bookingTimeId + '"/><span><font color="#999999">约满</font></span></td>';
                             } else {
-                                html += '<td><input type="radio" name="calendar" value="' + bookingDate + '_' + bookingTimeId + '" onclick="changBookingTime(\'' + bookingDate + '\',' + workTimeSoltOid + ',\'' + bookingTime + '\');"/><span>(' + bookingInfo.bookedCount + '/' + bookingInfo.bookCount + ')</span></td>';
+                                html += '<td><input type="radio" name="calendar" value="' + bookingDate + '_' + bookingTimeId + '" onclick="changBookingTime(\'' + bookingInfo.bookingDateLabel + '\',\'' + bookingDate + '\',' + bookingTimeId + ',\'' + bookingTime + '\');"/><span>(' + bookingInfo.bookedCount + '/' + bookingInfo.bookCount + ')</span></td>';
                             }
                         });
                         html += '</tr>';
@@ -217,8 +218,8 @@
             if (!checkValue()) {
                 return;
             }
+            $("#btnSubmit").attr("disabled", "disabled");
             $("#bookwebForm").submit();
-
             //$.ajax({
             //    url: "SubmitBookingInfo",
             //    type: "post",
@@ -238,8 +239,9 @@
             //});
         }
 
-        function changBookingTime(bookingDateStr, workTimeSoltOid, workTimeSoltName) {
+        function changBookingTime(bookingDateLabel, bookingDateStr, workTimeSoltOid, workTimeSoltName) {
             $("#bookingDateStr").val(bookingDateStr);
+            $("#bookingDateLabel").val(bookingDateLabel);
             $("#workTimeSoltOid").val(workTimeSoltOid);
             $("#workTimeSoltName").val(workTimeSoltName);
         }

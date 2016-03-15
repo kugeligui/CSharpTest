@@ -138,7 +138,7 @@ namespace Common
         /// <param name="requestUrl">请求地址</param>
         /// <param name="paras">参数键值对</param>
         /// <returns></returns>
-        public static string GetRequst(string requestUrl, Dictionary<string, object> paras, string cookie)
+        public static string GetRequst(string requestUrl, IDictionary<string, object> paras, IDictionary<string, string> cookies)
         {
             HttpWebRequest request = WebRequest.CreateHttp(requestUrl);
             request.Method = "POST";
@@ -147,7 +147,19 @@ namespace Common
             request.Headers.Add(HttpRequestHeader.AcceptLanguage, "zh-CN,zh;q=0.8");
             request.Headers.Add(HttpRequestHeader.KeepAlive, "TRUE");
             request.ContentType = "application/x-www-form-urlencoded";
-            request.Headers.Add(HttpRequestHeader.Cookie, "JSESSIONID=2A801C7E269971E91B1E8B51B441CBEE");
+            if (cookies != null)
+            {
+                string cookieStr = "";
+                foreach (var item in cookies)
+                {
+                    cookieStr += string.Format("{0}={1};", item.Key, item.Value);
+                }
+                if (!string.IsNullOrWhiteSpace(cookieStr))
+                {
+                    cookieStr = cookieStr.Remove(cookieStr.Length - 1, 1);
+                }
+                request.Headers.Add(HttpRequestHeader.Cookie, cookieStr);
+            }
             request.Headers.Add("DNT", "1");
             request.Host = "onlinebook.szreorc.com:8888";
             request.Headers.Add("Origin", "http://onlinebook.szreorc.com:8888");
@@ -165,6 +177,10 @@ namespace Common
                     else {
                         paraStr += string.Format("{0}={1}&", para.Key, HttpUtility.UrlEncode(para.Value.ToString(), Encoding.Default));
                     }
+                    //if (!string.IsNullOrWhiteSpace(paraStr))
+                    //{
+                    //    paraStr = paraStr.Remove(paraStr.Length - 1, 1);
+                    //}
                 }
             }
             try
@@ -187,6 +203,37 @@ namespace Common
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <returns></returns>
+        public static string GetVerificationCode(string imageUrl, string sessionId, ref string setSessionId)
+        {
+            HttpWebRequest request = WebRequest.CreateHttp(imageUrl);
+            if (!string.IsNullOrWhiteSpace(sessionId))
+            {
+                request.Headers.Add(HttpRequestHeader.Cookie, "JSESSIONID=" + sessionId);
+            }
+            WebResponse response = request.GetResponse();
+            setSessionId = sessionId;
+            string setCookie = response.Headers["Set-Cookie"];
+            if (!string.IsNullOrWhiteSpace(setCookie))
+            {
+                Match match = Regex.Match(setCookie, "JSESSIONID=([^;]+)");
+                if (match.Success)
+                {
+                    setSessionId = match.Groups[1].Value;
+                }
+            }
+            Stream responseStream = response.GetResponseStream();
+            MemoryStream mStream = new MemoryStream();
+            responseStream.CopyTo(mStream);
+            byte[] bytes = new byte[mStream.Length];
+            mStream.Position = 0;
+            mStream.Read(bytes, 0, bytes.Length);
+            return Convert.ToBase64String(bytes);
         }
 
         /// <summary>
