@@ -146,7 +146,9 @@ namespace Common
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
             request.Headers.Add(HttpRequestHeader.AcceptLanguage, "zh-CN,zh;q=0.8");
             request.Headers.Add(HttpRequestHeader.KeepAlive, "TRUE");
+            //request.Connection = "keep-alive";
             request.ContentType = "application/x-www-form-urlencoded";
+            request.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
             if (cookies != null)
             {
                 string cookieStr = "";
@@ -175,12 +177,12 @@ namespace Common
                         paraStr += string.Format("{0}=&", para.Key);
                     }
                     else {
-                        paraStr += string.Format("{0}={1}&", para.Key, HttpUtility.UrlEncode(para.Value.ToString(), Encoding.Default));
+                        paraStr += string.Format("{0}={1}&", para.Key, HttpUtility.UrlEncode(para.Value.ToString().Trim(), Encoding.Default));
                     }
-                    //if (!string.IsNullOrWhiteSpace(paraStr))
-                    //{
-                    //    paraStr = paraStr.Remove(paraStr.Length - 1, 1);
-                    //}
+                }
+                if (!string.IsNullOrWhiteSpace(paraStr))
+                {
+                    paraStr = paraStr.Remove(paraStr.Length - 1, 1);
                 }
             }
             try

@@ -64,5 +64,24 @@ namespace Common
                 return null;
             }
         }
+
+        /// <summary>
+        /// 获取js的变量值
+        /// </summary>
+        /// <param name="html">html代码</param>
+        /// <param name="key">变量名</param>
+        /// <returns></returns>
+        public static string GetJsValueByKey(string html, string key)
+        {
+            Regex regex = new Regex("var +" + key + " *= *('[^']+'|\"[^ \"]+\")", RegexOptions.IgnoreCase);
+            Match match = regex.Match(html);
+            if (match.Success)
+            {
+                return match.Groups[1].Value.Replace("&nbsp;", "").Replace("'", "").Replace("\"", "").Replace("&emsp;", "").Replace("&emsp;", "&ensp;");
+            }
+            else {
+                return null;
+            }
+        }
     }
 }

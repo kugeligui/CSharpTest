@@ -144,7 +144,6 @@ namespace WebTest.Controllers
             paraDict["szItemNo"] = Request["szItemNo"];
             paraDict["bookingType"] = ConvertHelper.StringToInt(Request["bookingType"]);
             paraDict["bussName"] = Request["bussName"];
-            paraDict["bussName"] = Request["bussName"];
             paraDict["bookingTypeName"] = Request["bookingTypeName"];
             paraDict["bookingDateStr"] = Request["bookingDateStr"];
             paraDict["bookingDateLabel"] = Request["bookingDateLabel"];
@@ -176,7 +175,7 @@ namespace WebTest.Controllers
             verfyInfo.workTimeSoltOid = ConvertHelper.StringToInt(HtmlContentHelper.GetValueByName(html, "workTimeSoltOid"));
             verfyInfo.workTimeSoltName = HtmlContentHelper.GetValueByName(html, "workTimeSoltName");
             verfyInfo.proveType = HtmlContentHelper.GetValueByName(html, "proveType");
-            verfyInfo.proveTypeName = HtmlContentHelper.GetValueByName(html, "houseName");
+            verfyInfo.proveTypeName = HtmlContentHelper.GetValueByName(html, "proveTypeName");
             verfyInfo.proveCode = HtmlContentHelper.GetValueByName(html, "proveCode");
             verfyInfo.houseName = HtmlContentHelper.GetValueByName(html, "houseName");
             verfyInfo.personName = HtmlContentHelper.GetValueByName(html, "personName");
@@ -184,7 +183,7 @@ namespace WebTest.Controllers
             verfyInfo.certificateTypeName = HtmlContentHelper.GetValueByName(html, "certificateTypeName");
             verfyInfo.certificateNo = HtmlContentHelper.GetValueByName(html, "certificateNo");
             verfyInfo.phoneNumber = HtmlContentHelper.GetValueByName(html, "phoneNumber");
-            verfyInfo.bookingSzAreaOid = ConvertHelper.StringToInt(HtmlContentHelper.GetValueByName(html, "certificateNo"));
+            verfyInfo.bookingSzAreaOid = ConvertHelper.StringToInt(HtmlContentHelper.GetValueByName(html, "bookingSzAreaOid"));
             verfyInfo.szAreaName = HtmlContentHelper.GetValueByName(html, "szAreaName");
             ViewBag.vCodeBase64 = vCodeBase64;
             ViewBag.JSESSIONID = sessionId;
@@ -227,26 +226,32 @@ namespace WebTest.Controllers
         public JsonResult CreateBooking()
         {
             Dictionary<string, object> paraDict = new Dictionary<string, object>();
-            paraDict["szItemNo"] = Request["szItemNo"];
+            paraDict["bookingInformationOid"] = Request["bookingInformationOid"];
+            paraDict["bookingCode"] = Request["bookingCode"];
+            paraDict["registrationAreaOid"] = ConvertHelper.StringToInt(Request["registrationAreaOid"]);
+            paraDict["registrationAreaName"] = Request["registrationAreaName"];
             paraDict["bookingType"] = ConvertHelper.StringToInt(Request["bookingType"]);
-            paraDict["bussName"] = Request["bussName"];
-            paraDict["bussName"] = Request["bussName"];
             paraDict["bookingTypeName"] = Request["bookingTypeName"];
-            paraDict["bookingDateStr"] = Request["bookingDateStr"];
+            paraDict["bussName"] = Request["bussName"];
+            paraDict["itemNo"] = Request["itemNo"];
+            paraDict["szItemNo"] = Request["szItemNo"];
             paraDict["bookingDateLabel"] = Request["bookingDateLabel"];
+            paraDict["bookingDateStr"] = Request["bookingDateStr"];
             paraDict["workTimeSoltOid"] = ConvertHelper.StringToInt(Request["workTimeSoltOid"]);
             paraDict["workTimeSoltName"] = Request["workTimeSoltName"];
-            paraDict["bookingSzAreaOid"] = ConvertHelper.StringToInt(Request["bookingSzAreaOid"]);
-            paraDict["houseName"] = Request["houseName"];
             paraDict["proveType"] = Request["proveType"];
+            paraDict["proveTypeName"] = Request["proveTypeName"];
             paraDict["proveCode"] = Request["proveCode"];    //权属证明编号
+            paraDict["houseName"] = Request["houseName"];
             paraDict["personName"] = Request["personName"];
-            paraDict["phoneNumber"] = Request["phoneNumber"];
             paraDict["certificateType"] = ConvertHelper.StringToInt(Request["certificateType"]);
+            paraDict["certificateTypeName"] = Request["certificateTypeName"];
             paraDict["certificateNo"] = Request["certificateNo"];
-            paraDict["registrationAreaOid"] = ConvertHelper.StringToInt(Request["registrationAreaOid"]);
-            paraDict["calendar"] = Request["calendar"];
+            paraDict["phoneNumber"] = Request["phoneNumber"];
+            paraDict["bookingSzAreaOid"] = ConvertHelper.StringToInt(Request["bookingSzAreaOid"]);
+            paraDict["szAreaName"] = Request["szAreaName"];
             paraDict["verificationcodereg"] = Request["verificationcodereg"];
+
             HttpCookie cookie = Request.Cookies["JSESSIONID"];
             string sessionId = "";
             if (cookie != null)
@@ -256,10 +261,44 @@ namespace WebTest.Controllers
             Dictionary<string, string> cookieDict = new Dictionary<string, string>();
             cookieDict["JSESSIONID"] = sessionId;
             string html = RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/createBookWeb.do?method=createBookWeb", paraDict, cookieDict);
-
+            string messgeFlag = HtmlContentHelper.GetJsValueByKey(html, "messgeFlag");
             ResultJson json = new ResultJson();
-
-
+            string message = HtmlContentHelper.GetJsValueByKey(html, "messge");
+            if (messgeFlag == "Y")
+            {
+                //成功，解析预约号
+                Regex regex = new Regex("([^>]+)已预约了(.+),预约流水号是<font color='red'>(.+)</font>,预约时间段是(.{11}),(.{11})（请在开始前10分钟到结束前10分钟内到现场取号）,预约登记点是(.+),地址是(.+),请您带齐身份证明和必备材料按时前往办理。业务咨询电话：([^\"]+)");
+                Match match = regex.Match(message);
+                if (match.Success)
+                {
+                    GroupCollection groups = match.Groups;
+                    BookingSuccessInfo successInfo = new BookingSuccessInfo();
+                    successInfo.UserName = groups[1].Value;
+                    successInfo.BookingTypeName = groups[2].Value;
+                    successInfo.SerialNumber = groups[3].Value;
+                    string dateStr = groups[4].Value;
+                    string timeStr = groups[5].Value;
+                    successInfo.BookingDateStr = dateStr;
+                    successInfo.BookingTimeStr = timeStr;
+                    successInfo.StartTime = DateTime.Parse(dateStr + " " + timeStr.Substring(0, 5));
+                    successInfo.EndTime = DateTime.Parse(dateStr + " " + timeStr.Substring(6, 5));
+                    successInfo.BookingRegistration = groups[6].Value;
+                    successInfo.RegistrationAddress = groups[7].Value;
+                    successInfo.RegistrationPhone = groups[8].Value;
+                    json.StatusCode = 0;
+                    json.Data = successInfo;
+                }
+                else
+                {
+                    json.StatusCode = 0;
+                    json.Message = message;
+                }
+            }
+            else
+            {
+                json.StatusCode = -1;
+                json.Message = message;
+            }
             return Json(json);
         }
     }

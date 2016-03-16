@@ -1,4 +1,5 @@
-﻿using Gma.QrCodeNet.Encoding;
+﻿using Common;
+using Gma.QrCodeNet.Encoding;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -67,6 +68,10 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
+            //string value = HtmlContentHelper.GetJsValueByKey("var messgeFlag = 'Y';//跳转标识     不能为空    用于判断成功还是失败", "messgeFlag");
+
+            //return;
+
             //遍历区域
             foreach (Area area in Enum.GetValues(typeof(Area)))
             {

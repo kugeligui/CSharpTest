@@ -29,12 +29,11 @@
                     }
                 }
             });
-
-            //$("#verificationcodeimg").attr("src", "http://onlinebook.szreorc.com:8888/onlinebook/createBookWeb.do?method=getVerificationcode&vcdemander=userregister&time=" + new Date().toString());
         }
 
         //提交
         function submitPost() {
+            var loadingLayer;
             if ($("#verificationcodereg").val() == "") {
                 layer.msg("请输入验证码");
                 $("#verificationcodereg").focus();
@@ -43,8 +42,31 @@
             var layerConfirm = layer.confirm('请确认申请表信息填写无误，确认后不能再修改，现在是否继续确认？', {
                 btn: ['是', '否']
             }, function () {
-                $("#bookwebForm").submit();
-                $("#submitBtn").attr("disabled", "disabled");
+                $.ajax({
+                    url: "CreateBooking",
+                    type: "post",
+                    data: $("#bookwebForm").serialize(),
+                    beforeSend: function () {
+                        loadingLayer = layer.msg('提交信息中...', { icon: 16 });
+                        $("#submitBtn").attr("disabled", "disabled");
+                    },
+                    success: function (result) {
+                        if (result.StatusCode != 0) {
+                            layer.alert(result.Message);
+                        } else {
+                            $("#submitBtn").val("关闭").unbind("click").click(function () {
+                                window.close();
+                            });
+                            var successInfo = result.Data;
+                            layer.alert(successInfo.UserName + "已预约了" + successInfo.BookingTypeName + ",预约流水号是<font color='red'>" + successInfo.SerialNumber + "</font>,预约时间段是" + successInfo.BookingDateStr + "," + successInfo.BookingTimeStr + "（请在开始前10分钟到结束前10分钟内到现场取号）,预约登记点是" + successInfo.BookingRegistration + ",地址是" + successInfo.RegistrationAddress + ",请您带齐身份证明和必备材料按时前往办理。业务咨询电话：" + successInfo.RegistrationPhone + "。");
+
+                        }
+                    },
+                    complete: function () {
+                        layer.close(loadingLayer);
+                        $("#submitBtn").removeAttr("disabled");
+                    }
+                });
             }, function () {
                 layer.close(layerConfirm);
             });
