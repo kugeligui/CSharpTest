@@ -70,7 +70,9 @@ namespace ConsoleTest
         {
             //string value = HtmlContentHelper.GetJsValueByKey("var messgeFlag = 'Y';//跳转标识     不能为空    用于判断成功还是失败", "messgeFlag");
 
-            //return;
+            CancelBooking("3012830036955506221160316S04g", "11000019790225207X", "13888888887");
+
+            return;
 
             //遍历区域
             foreach (Area area in Enum.GetValues(typeof(Area)))
@@ -290,6 +292,31 @@ namespace ConsoleTest
             catch
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 取消预约
+        /// </summary>
+        /// <param name="bookingCode"></param>
+        /// <param name="certificateNo"></param>
+        /// <param name="phoneNumber"></param>
+        private static void CancelBooking(string bookingCode, string certificateNo, string phoneNumber)
+        {
+            Dictionary<string, object> paraDict = new Dictionary<string, object>();
+            //预约号            
+            if (bookingCode.Length > 6)
+            {
+                bookingCode = bookingCode.Substring(bookingCode.Length - 6, 6);
+            }
+            string queryHtml = RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/goCancelBookWeb.do?method=goCancelBookWeb&bookingCode=" + bookingCode + "&certificateNo=" + certificateNo + "&phoneNumber=" + phoneNumber, null, null);
+            //获取预约号
+            Match match = Regex.Match(queryHtml, @"bookWebCancel\('(-?\d+)'\)", RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                string bookingInformationOid = match.Groups[1].Value;
+                paraDict["bookingInformationOid"] = bookingInformationOid;
+                RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/cancelBookWeb.do?method=cancelBookWeb", paraDict, null);
             }
         }
     }

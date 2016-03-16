@@ -82,8 +82,7 @@
                         $.each(bookingTimeInfo, function (j, bookingInfo) {
                             var bookingDate = bookingInfo.bookingDate;
                             var bookingTime = bookingInfo.bookingTime;
-                            var bookingTimeId = n.workTimeSoltOid;
-                            console.log(bookingTime);
+                            var bookingTimeId = n.workTimeSoltOid;                            
                             if (bookingInfo.isEnd) {
                                 html += '<td><input type="radio" name="calendar" disabled="disabled"><span><font color="#999999">已结束</font></span></td></td>';
                             } else if (bookingInfo.bookedCount >= bookingInfo.bookCount) {
@@ -198,6 +197,7 @@
                     return false;
                 }
                 if (!validIdCode(certificateNo)) {
+                    $("#certificateNo").focus();
                     return false;
                 }
             }

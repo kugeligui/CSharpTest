@@ -267,7 +267,7 @@ namespace WebTest.Controllers
             if (messgeFlag == "Y")
             {
                 //成功，解析预约号
-                Regex regex = new Regex("([^>]+)已预约了(.+),预约流水号是<font color='red'>(.+)</font>,预约时间段是(.{11}),(.{11})（请在开始前10分钟到结束前10分钟内到现场取号）,预约登记点是(.+),地址是(.+),请您带齐身份证明和必备材料按时前往办理。业务咨询电话：([^\"]+)");
+                Regex regex = new Regex("([^>]+)已预约了(.+),预约流水号是<[^>]+>(.+)</font>,预约时间段是(.{11}),(.{11})（请在开始前10分钟到结束前10分钟内到现场取号）,预约登记点是(.+),地址是(.+),请您带齐身份证明和必备材料按时前往办理。业务咨询电话：([^\"]+)");
                 Match match = regex.Match(message);
                 if (match.Success)
                 {
@@ -293,6 +293,11 @@ namespace WebTest.Controllers
                     json.StatusCode = 0;
                     json.Message = message;
                 }
+            }
+            else if (message.Contains("验证码校验失败"))
+            {
+                json.StatusCode = -2;
+                json.Message = message;
             }
             else
             {

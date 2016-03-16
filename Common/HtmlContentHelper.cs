@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace Common
 {
@@ -23,7 +19,7 @@ namespace Common
                 return match.Groups[1].Value.Replace("&nbsp;", "");
             }
             else {
-                return null;
+                return "";
             }
         }
 
@@ -42,7 +38,7 @@ namespace Common
                 return match.Groups[1].Value.Replace("&nbsp;", "");
             }
             else {
-                return null;
+                return "";
             }
         }
 
@@ -61,7 +57,7 @@ namespace Common
                 return match.Groups[1].Value.Replace("&nbsp;", "");
             }
             else {
-                return null;
+                return "";
             }
         }
 
@@ -73,14 +69,14 @@ namespace Common
         /// <returns></returns>
         public static string GetJsValueByKey(string html, string key)
         {
-            Regex regex = new Regex("var +" + key + " *= *('[^']+'|\"[^ \"]+\")", RegexOptions.IgnoreCase);
+            Regex regex = new Regex("var +" + key + " *= *('[^']+'|\"[^\"]+\")", RegexOptions.IgnoreCase);
             Match match = regex.Match(html);
             if (match.Success)
             {
                 return match.Groups[1].Value.Replace("&nbsp;", "").Replace("'", "").Replace("\"", "").Replace("&emsp;", "").Replace("&emsp;", "&ensp;");
             }
             else {
-                return null;
+                return "";
             }
         }
     }

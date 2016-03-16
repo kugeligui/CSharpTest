@@ -53,6 +53,9 @@
                     success: function (result) {
                         if (result.StatusCode != 0) {
                             layer.alert(result.Message);
+                            if (result.StatusCode == -2) {
+                                refreshvc();
+                            }
                         } else {
                             $("#submitBtn").val("关闭").unbind("click").click(function () {
                                 window.close();
