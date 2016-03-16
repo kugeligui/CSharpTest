@@ -301,5 +301,43 @@ namespace WebTest.Controllers
             }
             return Json(json);
         }
+
+        /// <summary>
+        /// 添加取消预约号
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult CancelBooking()
+        {
+            Dictionary<string, object> paraDict = new Dictionary<string, object>();
+            //预约号
+            string bookingCode = Request["bookingCode"];
+            if (bookingCode.Length > 6)
+            {
+                bookingCode = bookingCode.Substring(bookingCode.Length - 6, 6);
+            }
+            //证件号
+            string certificateNo = Request["certificateNo"];
+            string phoneNumber = Request["phoneNumber"];
+
+            string queryHtml = RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/goCancelBookWeb.do?method=goCancelBookWeb&bookingCode=" + bookingCode + "&certificateNo=" + certificateNo + "&phoneNumber=" + phoneNumber, null, null);
+            //获取预约号
+            Match match = Regex.Match(queryHtml, @"bookWebCancel\('-?\d+'\)", RegexOptions.IgnoreCase);
+            ResultJson json = new ResultJson();
+            if (match.Success)
+            {
+                string bookingInformationOid = match.Groups[0].Value;
+                paraDict["bookingInformationOid"] = bookingInformationOid;
+                RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/cancelBookWeb.do?method=cancelBookWeb", paraDict, null);
+                json.StatusCode = 0;
+                json.Message = "取消预约成功";
+            }
+            else
+            {
+                json.StatusCode = -1;
+                json.Message = "对不起，没有查询到数据！";
+            }
+            return Json(json);
+        }
     }
 }
