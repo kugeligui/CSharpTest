@@ -68,12 +68,20 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
+            decimal dd = 11.00M;
+            Console.WriteLine(dd.ToString("G"));
             //string value = HtmlContentHelper.GetJsValueByKey("var messgeFlag = 'Y';//跳转标识     不能为空    用于判断成功还是失败", "messgeFlag");
 
-            CancelBooking("3012830036955506221160316S04g", "11000019790225207X", "13888888887");
+            //BookingTool.BookingToolClient client = new BookingTool.BookingToolClient();
+            //client.Booking(1);
 
-            return;
+            //CancelBooking("3012830036955506221160316S04g", "11000019790225207X", "13888888887");
 
+            Console.ReadKey();
+        }
+
+        private static void GetBookingInfo()
+        {
             //遍历区域
             foreach (Area area in Enum.GetValues(typeof(Area)))
             {
@@ -131,7 +139,6 @@ namespace ConsoleTest
                 }
                 Console.WriteLine();
             }
-            Console.ReadKey();
         }
 
         /// <summary>

@@ -58,7 +58,7 @@ namespace WebTest.Controllers
         public JsonResult GetRegistration()
         {
             int araeId = ConvertHelper.StringToInt(Request["area"]);
-            IEnumerable<Registration> regis = RequestHelper.GetRequst<IEnumerable<Registration>>(RequestHelper.RequstType.获取办证登记点, araeId, 1, "30128300369555062213440300");
+            IEnumerable<Registration> regis = RequestHelper.GetRequst<IEnumerable<Registration>>(Enums.RequstType.获取办证登记点, araeId, 1, "30128300369555062213440300");
             ResultJson json = new ResultJson();
             json.Data = regis;
             json.StatusCode = 0;
@@ -74,10 +74,10 @@ namespace WebTest.Controllers
         public JsonResult GetBookingInfo()
         {
             int registrationId = ConvertHelper.StringToInt(Request["registrationId"]);
-            IEnumerable<BookingDateInfo> bookingDateList = RequestHelper.GetRequst<IEnumerable<BookingDateInfo>>(RequestHelper.RequstType.获取预约日期, registrationId);
-            IEnumerable<BookingTimeInfo> bookingTimeList = RequestHelper.GetRequst<IEnumerable<BookingTimeInfo>>(RequestHelper.RequstType.获取预约时间, registrationId, 1);
+            IEnumerable<BookingDateInfo> bookingDateList = RequestHelper.GetRequst<IEnumerable<BookingDateInfo>>(Enums.RequstType.获取预约日期, registrationId);
+            IEnumerable<BookingTimeInfo> bookingTimeList = RequestHelper.GetRequst<IEnumerable<BookingTimeInfo>>(Enums.RequstType.获取预约时间, registrationId, 1);
             Dictionary<string, object> dict = new Dictionary<string, object>();
-            string bookInfoStr = RequestHelper.GetRequst(RequestHelper.RequstType.获取预约信息, registrationId, 1);
+            string bookInfoStr = RequestHelper.GetRequst(Enums.RequstType.获取预约信息, registrationId, 1);
             List<IEnumerable<BookingInfo>> bookingInfoList = new List<IEnumerable<BookingInfo>>();
             foreach (var time in bookingTimeList)
             {
@@ -161,7 +161,7 @@ namespace WebTest.Controllers
             paraDict["calendar"] = Request["calendar"];
 
             string html = RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/goAffirmBookWeb.do?method=goAffirmBookWeb", paraDict, null);
-
+            //解析网页内容
             VerfyInfo verfyInfo = new VerfyInfo();
             verfyInfo.registrationAreaOid = ConvertHelper.StringToInt(HtmlContentHelper.GetValueByName(html, "registrationAreaOid"));
             verfyInfo.registrationAreaName = HtmlContentHelper.GetValueByName(html, "registrationAreaName");

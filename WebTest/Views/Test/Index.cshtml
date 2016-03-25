@@ -82,7 +82,7 @@
                         $.each(bookingTimeInfo, function (j, bookingInfo) {
                             var bookingDate = bookingInfo.bookingDate;
                             var bookingTime = bookingInfo.bookingTime;
-                            var bookingTimeId = n.workTimeSoltOid;                            
+                            var bookingTimeId = n.workTimeSoltOid;
                             if (bookingInfo.isEnd) {
                                 html += '<td><input type="radio" name="calendar" disabled="disabled"><span><font color="#999999">已结束</font></span></td></td>';
                             } else if (bookingInfo.bookedCount >= bookingInfo.bookCount) {
@@ -302,6 +302,7 @@
                         <td class="fromStyle">
                             <select name="proveType" id="proveType" class="text">
                                 <option value="00">不动产登记证明或房地产证</option>
+                                <option value="01">合同</option>
                             </select>
                         </td>
                         <td class="label">权属证明编号</td>

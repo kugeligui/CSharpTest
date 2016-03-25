@@ -13,16 +13,7 @@ namespace Common
 {
     public class RequestHelper
     {
-        /// <summary>
-        /// 请求操作
-        /// </summary>
-        public enum RequstType
-        {
-            获取办证登记点,
-            获取预约日期,
-            获取预约时间,
-            获取预约信息
-        }
+
 
         /// <summary>
         /// 获取请求
@@ -31,7 +22,7 @@ namespace Common
         /// <param name="type">请求类型</param>
         /// <param name="paras">参数值param0、param1、param2...</param>
         /// <returns></returns>
-        public static T GetRequst<T>(RequstType type, params object[] paras) where T : class
+        public static T GetRequst<T>(Enums.RequstType type, params object[] paras) where T : class
         {
             return JsonConvert.DeserializeObject<T>(GetJsonString(GetRequst(type, paras)));
         }
@@ -43,35 +34,35 @@ namespace Common
         /// <param name="type">请求类型</param>
         /// <param name="paras">参数值param0、param1、param2...</param>
         /// <returns></returns>
-        public static string GetRequst(RequstType type, params object[] paras)
+        public static string GetRequst(Enums.RequstType type, params object[] paras)
         {
             string url = "";
             string scriptName = "";
             string methodName = "";
             switch (type)
             {
-                case RequstType.获取办证登记点:
+                case Enums.RequstType.获取办证登记点:
                     {
                         url = "http://onlinebook.szreorc.com:8888/onlinebook/dwr/exec/bookWebActionDwr.bookingSzAreaChange.dwr";
                         scriptName = "bookWebActionDwr";
                         methodName = "bookingSzAreaChange";
                         break;
                     }
-                case RequstType.获取预约日期:
+                case Enums.RequstType.获取预约日期:
                     {
                         url = "http://onlinebook.szreorc.com:8888/onlinebook/dwr/exec/bookingInformationDwr.countAllBookingAmount.dwr";
                         scriptName = "workDayDwr";
                         methodName = "listWorkDayByRegistrationAreaOid";
                         break;
                     }
-                case RequstType.获取预约时间:
+                case Enums.RequstType.获取预约时间:
                     {
                         url = "http://onlinebook.szreorc.com:8888/onlinebook/dwr/exec/workTimeSoltDwr.listWorkTimeSoltByRegistrationAreaOid.dwr";
                         scriptName = "workTimeSoltDwr";
                         methodName = "listWorkTimeSoltByRegistrationAreaOid";
                         break;
                     }
-                case RequstType.获取预约信息:
+                case Enums.RequstType.获取预约信息:
                     {
                         url = "http://onlinebook.szreorc.com:8888/onlinebook/dwr/exec/bookingInformationDwr.countAllBookingAmount.dwr";
                         scriptName = "bookingInformationDwr";

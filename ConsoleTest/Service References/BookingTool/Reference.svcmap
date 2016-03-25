@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="153c966b-9bf3-4843-9c85-429f68a95697" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:33835/BookingTool.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BookingTool.xsd" MetadataType="Schema" ID="d3d8368e-10a1-4426-b0a3-509b4bb37561" SourceId="1" SourceUrl="http://localhost:33835/BookingTool.svc?xsd=xsd0" />
+    <MetadataFile FileName="BookingTool1.xsd" MetadataType="Schema" ID="4f0e0219-6ec5-465c-a2a9-9e8672fcb88a" SourceId="1" SourceUrl="http://localhost:33835/BookingTool.svc?xsd=xsd1" />
+    <MetadataFile FileName="BookingTool.wsdl" MetadataType="Wsdl" ID="8bf8be0a-50fe-4865-81d0-a8337a4fcc75" SourceId="1" SourceUrl="http://localhost:33835/BookingTool.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="BookingTool.disco" MetadataType="Disco" ID="9ceb51f3-cd2c-4c4a-b161-58f7a555dded" SourceId="1" SourceUrl="http://localhost:33835/BookingTool.svc?disco" />
+    <MetadataFile FileName="BookingTool1.wsdl" MetadataType="Wsdl" ID="e91cb6a9-b3f8-4c1d-b5db-3765e8b375ab" SourceId="1" SourceUrl="http://localhost:33835/BookingTool.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
