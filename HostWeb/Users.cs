@@ -1,7 +1,7 @@
 ﻿using IdentityServer3.Core.Services.InMemory;
 using System.Collections.Generic;
 
-namespace Host
+namespace HostWeb
 {
     static class Users
     {

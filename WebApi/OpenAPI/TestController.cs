@@ -14,9 +14,10 @@ namespace WebApi.OpenAPI
             {
                 return Json(new
                 {
-                    message = "OK user",
+                    message = "请求成功",
                     client = caller.FindFirst("client_id").Value,
-                    subject = subjectClaim.Value
+                    user = subjectClaim.Value,
+                    exp = caller.FindFirst("exp").Value
                 });
             }
             else
