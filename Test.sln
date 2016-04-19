@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTest", "WebTest\WebTest.csproj", "{2DDEA3F6-36D3-42EC-8D86-72D17E4095C5}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsTest", "WindowsFormsTest\WindowsFormsTest.csproj", "{E0B58D3E-AC8E-436D-8600-C3AA48B7EC25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth2", "OAuth2\OAuth2.csproj", "{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
