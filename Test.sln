@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsTest", "Windows
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth2", "OAuth2\OAuth2.csproj", "{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D35EC83F-E51F-4C82-BEBD-1B50A5ADD908}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBC597A8-CB5E-4B9E-A0CA-347F971E97A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
