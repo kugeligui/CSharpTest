@@ -16,21 +16,28 @@ namespace Client
             //CallApi(token);
 
             var token = GetUserToken();
-            CallApi(token);
+            //CallApi(token);
             Console.ReadKey();
         }
 
-        static TokenResponse GetClientToken()
-        {
-            var client = new TokenClient(
-                "http://localhost:5000/connect/token", "ddzf", "F621F470-9731-4A25-80EF-67A6F7C5F4B8");
-            return client.RequestClientCredentialsAsync("api1").Result;
-        }
+        //static TokenResponse GetClientToken()
+        //{
+        //    var client = new TokenClient(
+        //        "http://localhost:5000/connect/token", "ddzf", "F621F470-9731-4A25-80EF-67A6F7C5F4B8");
+        //    return client.RequestClientCredentialsAsync("api1").Result;
+        //}
 
         static TokenResponse GetUserToken()
         {
-            var client = new TokenClient("http://localhost:5000/connect/token", "ddqk", "F621F470-9731-4A25-80EF-67A6F7C5F4B8");
-            return client.RequestResourceOwnerPasswordAsync("test", "test", "api1").Result;
+            //var client = new TokenClient("http://localhost:5000/connect/token", "ddqk", "F621F470-9731-4A25-80EF-67A6F7C5F4B8");
+            //return client.RequestResourceOwnerPasswordAsync("test", "test", "api1").Result;
+
+            var client = new TokenClient("http://localhost:5000/connect/token", "clientTest", "F621F470");
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict["userid"] = "123";
+            dict["deviceId"] = "xssfsf";
+            dict["userName"] = "test";
+            return client.RequestAsync(dict).Result;
         }
 
         static void CallApi(TokenResponse response)
