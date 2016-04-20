@@ -6,7 +6,7 @@ using System.Web;
 using IdentityServer3.Core.Models;
 using System.Threading.Tasks;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class ScopeStore : IScopeStore
     {
@@ -20,8 +20,8 @@ namespace HostWeb
                     List<Scope> scopes = new List<Scope>();
                     scopes.Add(new Scope()
                     {
-                        Name = "api1",
-                        DisplayName = "测试"
+                        Name = "get_user_info",
+                        DisplayName = "获取用户信息"
                     });
                     _scopes = scopes;
                 }
@@ -47,6 +47,7 @@ namespace HostWeb
         public Task<IEnumerable<Scope>> GetScopesAsync(bool publicOnly = true)
         {
             return Task.FromResult(Scopes.Where(m => !publicOnly || m.IncludeAllClaimsForUser == publicOnly));
+            //return Task.FromResult(Scopes);
         }
     }
 }

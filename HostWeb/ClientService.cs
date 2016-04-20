@@ -6,7 +6,7 @@ using System.Web;
 using IdentityServer3.Core.Models;
 using System.Threading.Tasks;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class ClientService : IClientStore
     {
@@ -25,9 +25,22 @@ namespace HostWeb
                         ClientId = "clientTest",
                         Enabled = true,
                         AccessTokenType = AccessTokenType.Reference,
-                        Flow = Flows.Implicit,
-                        ClientSecrets = new List<Secret> { new Secret("F621F470".Sha256()) }
+                        Flow = Flows.ResourceOwner,
+                        ClientSecrets = new List<Secret> { new Secret("F621F470".Sha256()) },
+                        AllowedScopes = new List<string>() { "get_user_info" }
                     });
+
+                    clients.Add(new Client
+                    {
+                        ClientName = "咚咚找房",
+                        ClientId = "ddzf",
+                        Enabled = true,
+                        AccessTokenType = AccessTokenType.Reference,
+                        Flow = Flows.ResourceOwner,
+                        ClientSecrets = new List<Secret> { new Secret("F621F470".Sha256()) },
+                        AllowedScopes = new List<string>() { "get_user_info" }
+                    });
+
                     _clients = clients;
                 }
                 return _clients;

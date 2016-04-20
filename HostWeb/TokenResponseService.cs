@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using IdentityServer3.Core.Services.Default;
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Validation;
+using SZHome.OAuth2.BLL;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class TokenResponseService : ICustomTokenResponseGenerator
     {
@@ -21,13 +22,17 @@ namespace HostWeb
         /// <returns></returns>
         public Task<TokenResponse> GenerateAsync(ValidatedTokenRequest request, TokenResponse response)
         {
-            //这里写入数据库
-
-
-
-            //request.user
-            //throw new NotImplementedException();
-            return Task.FromResult<TokenResponse>(response);
+            int userId = 0;
+            var claim = request.Subject.FindFirst("sub");
+            if (claim != null)
+            {
+                string sub = claim.Value;
+                if (int.TryParse(sub, out userId))
+                {
+                    BBSOAuthLoginBLL.Insert(request.Client.ClientId, userId, request.Client.AllowedScopes, response.AccessToken, response.AccessTokenLifetime);
+                }
+            }
+            return Task.FromResult(response);
         }
     }
 }

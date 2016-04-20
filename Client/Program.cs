@@ -15,8 +15,11 @@ namespace Client
             //var token = GetClientToken();
             //CallApi(token);
 
-            var token = GetUserToken();
-            //CallApi(token);
+            //var token = GetUserToken();
+            //Console.WriteLine(token.Error);
+
+            CallApi("1b8d404d30fdc195095c23b36b6e4700");
+            //CallApi(token.AccessToken);
             Console.ReadKey();
         }
 
@@ -29,23 +32,17 @@ namespace Client
 
         static TokenResponse GetUserToken()
         {
-            //var client = new TokenClient("http://localhost:5000/connect/token", "ddqk", "F621F470-9731-4A25-80EF-67A6F7C5F4B8");
-            //return client.RequestResourceOwnerPasswordAsync("test", "test", "api1").Result;
-
-            var client = new TokenClient("http://localhost:5000/connect/token", "clientTest", "F621F470");
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict["userid"] = "123";
-            dict["deviceId"] = "xssfsf";
-            dict["userName"] = "test";
-            return client.RequestAsync(dict).Result;
+            var client = new TokenClient("http://localhost:5000/connect/token", "ddzf", "F621F470");
+            return client.RequestResourceOwnerPasswordAsync("斑竹", "123456", "get_user_info").Result;
+            //return client.RequestResourceOwnerPasswordAsync(null, dict).Result;
         }
 
-        static void CallApi(TokenResponse response)
+        static void CallApi(string accessToken)
         {
             var client = new HttpClient();
-            client.SetBearerToken(response.AccessToken);
-
-            Console.WriteLine(client.GetStringAsync("https://localhost:44348/test").Result);
+            client.SetBearerToken(accessToken);
+            //client.
+            Console.WriteLine(client.GetStringAsync("https://localhost:44310/get_user_info").Result);
         }
     }
 }

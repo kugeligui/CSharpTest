@@ -1,11 +1,7 @@
-﻿using Common;
-using Gma.QrCodeNet.Encoding;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -316,15 +312,15 @@ namespace ConsoleTest
             {
                 bookingCode = bookingCode.Substring(bookingCode.Length - 6, 6);
             }
-            string queryHtml = RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/goCancelBookWeb.do?method=goCancelBookWeb&bookingCode=" + bookingCode + "&certificateNo=" + certificateNo + "&phoneNumber=" + phoneNumber, null, null);
+            //string queryHtml = RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/goCancelBookWeb.do?method=goCancelBookWeb&bookingCode=" + bookingCode + "&certificateNo=" + certificateNo + "&phoneNumber=" + phoneNumber, null, null);
             //获取预约号
-            Match match = Regex.Match(queryHtml, @"bookWebCancel\('(-?\d+)'\)", RegexOptions.IgnoreCase);
-            if (match.Success)
-            {
-                string bookingInformationOid = match.Groups[1].Value;
-                paraDict["bookingInformationOid"] = bookingInformationOid;
-                RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/cancelBookWeb.do?method=cancelBookWeb", paraDict, null);
-            }
+            //Match match = Regex.Match(queryHtml, @"bookWebCancel\('(-?\d+)'\)", RegexOptions.IgnoreCase);
+            //if (match.Success)
+            //{
+            //    string bookingInformationOid = match.Groups[1].Value;
+            //    paraDict["bookingInformationOid"] = bookingInformationOid;
+            //    //RequestHelper.GetRequst("http://onlinebook.szreorc.com:8888/onlinebook/cancelBookWeb.do?method=cancelBookWeb", paraDict, null);
+            //}
         }
     }
 

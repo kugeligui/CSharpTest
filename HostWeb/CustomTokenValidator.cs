@@ -1,13 +1,9 @@
 ﻿using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
 using IdentityServer3.Core.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class CustomTokenValidator : DefaultCustomTokenValidator
     {
@@ -23,6 +19,7 @@ namespace HostWeb
         /// <returns></returns>
         public override Task<TokenValidationResult> ValidateAccessTokenAsync(TokenValidationResult result)
         {
+            //这里验证
             return Task.FromResult(result);
         }
     }

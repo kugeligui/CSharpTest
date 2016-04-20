@@ -1,6 +1,6 @@
 ﻿using IdentityServer3.Core.Services.Default;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class LocalizationService : DefaultLocalizationService
     {

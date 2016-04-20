@@ -1,8 +1,13 @@
-﻿using IdentityServer3.Core.Configuration;
+﻿using IdentityServer3.AccessTokenValidation;
+using IdentityServer3.Core.Configuration;
+using IdentityServer3.Core.Models;
 using IdentityServer3.Core.Services;
 using Owin;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Web.Http;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     class Startup
     {
@@ -20,7 +25,7 @@ namespace HostWeb
                     RaiseSuccessEvents = true,
                     RaiseErrorEvents = true,
                     RaiseFailureEvents = true,
-                    RaiseInformationEvents = true
+                    RaiseInformationEvents = true,
                 },
             };
             //IdentityServer3.Core.Services.ITokenService
@@ -54,15 +59,49 @@ namespace HostWeb
             ClientPermissionsService clientPermissionsService = new ClientPermissionsService(permissionsStore, clientStore, scopeStore, localizationService);
             options.Factory.ClientPermissionsService = new Registration<IClientPermissionsService>(p => clientPermissionsService);
 
-            //IdentityServer3.Core.Services.IUserService
+            //请求验证
+            CustomRequestValidator requestValidator = new CustomRequestValidator();
+            options.Factory.CustomRequestValidator = new Registration<ICustomRequestValidator>(m => requestValidator);
+
+            var clientStoreCache = new ClientStoreCache();
+            var scopeStoreCache = new ScopeStoreCache();
+            var userServiceCache = new UserServiceCache();
+
+            options.Factory.ConfigureClientStoreCache(new Registration<ICache<Client>>(clientStoreCache));
+            options.Factory.ConfigureScopeStoreCache(new Registration<ICache<IEnumerable<Scope>>>(scopeStoreCache));
+            options.Factory.ConfigureUserServiceCache(new Registration<ICache<IEnumerable<Claim>>>(userServiceCache));
+
+            //options.Factory.v
+
+            //认证服务
+            //ConsentStore consentStore = new ConsentStore();
+            //options.Factory.ConsentStore = new Registration<IConsentStore>(m => consentStore);
+            //options.Factory.ConsentService = new Registration<IConsentService>(m => new ConsentService(consentStore));
+
+            //options.Factory.ConfigureUserServiceCache(new Registration<ICache<IEnumerable<Claim>>());
+
+            //options.Factory.CustomRequestValidator
+            //IdentityServer3.Core.Services.ICache<
+            //IdentityServer3.Core.Services.Default.DefaultCustomRequestValidator
 
             //options.Factory.CustomTokenValidator=new Registration<ICustomTokenValidator>()
 
-
-            //var clientService = new ClientValidateService();
-            //options.Factory.CustomTokenResponseGenerator = new Registration<ICustomTokenResponseGenerator>(m => tokenService);
-
             app.UseIdentityServer(options);
+
+            app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+            {
+                Authority = "http://localhost:5000",
+                ValidationMode = ValidationMode.ValidationEndpoint,
+                RequiredScopes = new[] { "get_user_info" }
+            });
+
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+
+            //// require authentication for all controllers
+            config.Filters.Add(new AuthorizeAttribute());
+
+            app.UseWebApi(config);
         }
     }
 }

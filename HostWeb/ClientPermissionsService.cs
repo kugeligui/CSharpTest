@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class ClientPermissionsService : DefaultClientPermissionsService
     {

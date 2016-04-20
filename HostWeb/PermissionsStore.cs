@@ -5,7 +5,7 @@ using System.Linq;
 using IdentityServer3.Core.Models;
 using System.Threading.Tasks;
 
-namespace HostWeb
+namespace SZHome.OAuth2.HostWeb
 {
     public class PermissionsStore : IPermissionsStore
     {
@@ -27,7 +27,8 @@ namespace HostWeb
         /// <returns></returns>
         public Task RevokeAsync(string subject, string client)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Task.FromResult(0);
         }
     }
 }
