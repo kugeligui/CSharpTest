@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using SZHomeDLL;
+using WebTest.BLL;
 
 namespace WebTest.Controllers
 {
@@ -31,18 +33,42 @@ namespace WebTest.Controllers
             }
         }
 
-        //[HttpGet]
-        //public ActionResult Index()
-        //{
-        //    //HttpCookie cookie = Request.Cookies["JSESSIONID"];
-        //    //if (cookie == null)
-        //    //{
-        //    //    cookie = new HttpCookie("JSESSIONID", Guid.NewGuid().ToString("N"));
-        //    //    cookie.Expires = DateTime.Now.AddDays(1);
-        //    //    Response.Cookies.Add(cookie);
-        //    //}
-        //    return View();
-        //}
+        [HttpGet]
+        public ActionResult Index()
+        {
+            //HttpCookie cookie = Request.Cookies["JSESSIONID"];
+            //if (cookie == null)
+            //{
+            //    cookie = new HttpCookie("JSESSIONID", Guid.NewGuid().ToString("N"));
+            //    cookie.Expires = DateTime.Now.AddDays(1);
+            //    Response.Cookies.Add(cookie);
+            //}
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetList()
+        {
+            int page = ConvertHelper.StringToInt(Request["page"]);
+            int pagesize = 100;
+            int start = (page - 1) * pagesize;
+            var list = tmpuserBLL.GetList(start, pagesize);
+            List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+            foreach (var item in list)
+            {
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                dict["account"] = SZHome.BBSAPI.NeteaseIM.NeteaseIMTools.GetAccId(item.id, SZHome.BBSAPI.NeteaseIM.NeteaseIMEnums.UserType.咚咚找房);
+                dict["token"] = SZHome.BBSAPI.NeteaseIM.NeteaseIMTools.EncodePsw(item.id);
+                result.Add(dict);
+            }
+
+            var data = new
+            {
+                list = result,
+                count = list.Count
+            };
+            return Json(data);
+        }
 
         ///// <summary>
         ///// 获取登记点

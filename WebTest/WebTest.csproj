@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NeteaseIM">
+      <HintPath>..\..\DLL\NeteaseIM\NeteaseIM.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
@@ -65,6 +68,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="SZHomeDLL">
       <HintPath>..\..\dll\szhomedll\SZHomeDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="Yitu.DBUtility">
+      <HintPath>..\..\DLL\Yitu.DBUtility.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -838,6 +844,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="tmpuserBLL.cs" />
+    <Compile Include="tmpuserDAL.Base.cs" />
+    <Compile Include="tmpuserDAL.cs" />
+    <Compile Include="tmpuserEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

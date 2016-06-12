@@ -13,6 +13,8 @@ namespace SZHome.OAuth2.HostWeb
     {
         public void Configuration(IAppBuilder app)
         {
+            const string CachingRegistrationName = "IdentityServerServiceFactoryExtensions.cache";
+
             var options = new IdentityServerOptions
             {
                 Factory = new IdentityServerServiceFactory(),
@@ -44,7 +46,7 @@ namespace SZHome.OAuth2.HostWeb
 
             //本地化服务
             LocalizationService localizationService = new LocalizationService();
-            options.Factory.LocalizationService = new Registration<ILocalizationService>(l => localizationService);
+            //options.Factory.LocalizationService = new Registration<ILocalizationService>(l => localizationService);
 
             //access token生成验证
             var tokenResponseService = new TokenResponseService();
@@ -63,13 +65,15 @@ namespace SZHome.OAuth2.HostWeb
             CustomRequestValidator requestValidator = new CustomRequestValidator();
             options.Factory.CustomRequestValidator = new Registration<ICustomRequestValidator>(m => requestValidator);
 
+            //注册自定义存储
             var clientStoreCache = new ClientStoreCache();
             var scopeStoreCache = new ScopeStoreCache();
             var userServiceCache = new UserServiceCache();
+            options.Factory.ConfigureClientStoreCache(new Registration<ICache<Client>>(clientStoreCache, CachingRegistrationName));
+            options.Factory.ConfigureScopeStoreCache(new Registration<ICache<IEnumerable<Scope>>>(scopeStoreCache, CachingRegistrationName));
+            options.Factory.ConfigureUserServiceCache(new Registration<ICache<IEnumerable<Claim>>>(userServiceCache, CachingRegistrationName));
 
-            options.Factory.ConfigureClientStoreCache(new Registration<ICache<Client>>(clientStoreCache));
-            options.Factory.ConfigureScopeStoreCache(new Registration<ICache<IEnumerable<Scope>>>(scopeStoreCache));
-            options.Factory.ConfigureUserServiceCache(new Registration<ICache<IEnumerable<Claim>>>(userServiceCache));
+            //options.Factory.service
 
             //options.Factory.v
 

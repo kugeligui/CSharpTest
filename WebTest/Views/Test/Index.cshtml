@@ -8,361 +8,80 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/Css/style.css" rel="stylesheet" />
-    <link href="~/Content/Css/colorableTabPanel.css" rel="stylesheet" />
-    <link href="~/Content/Css/common.css" rel="stylesheet" />
-    <link href="~/Content/Css/examples.css" rel="stylesheet" />
-    <link href="~/Content/Css/ext-all.css" rel="stylesheet" />
-    <link href="~/Content/Css/global.css" rel="stylesheet" />
-    <link href="~/Content/Css/govmain.css?v=1" rel="stylesheet" />
-    <title>预约查询</title>
     <script src="~/Content/Lib/Jquery-1.12.0/jquery-1.12.0.min.js"></script>
-    <script src="~/Content/Lib/layer/layer.js"></script>
-    <script src="~/Content/Lib/Module/common_validator.js"></script>
+    <script src="~/Content/webdemo/js/Web_SDK_Base_v2.1.0.js"></script>
+    <script src="~/Content/webdemo/js/Web_SDK_NIM_v2.1.0.js"></script>
     <script type="text/javascript">
+        var pageStart = 50;
+        var pageCount = 59;
         $(function () {
-            bind();
+            for (var i = pageStart; i <= pageCount; i++) {
+                $.ajax({
+                    url: "/test/getlist",
+                    type: "post",
+                    data: { page: i },
+                    success: function (result) {
+                        if (result.count == 0) {
+                            return;
+                        }
+                        var list = result.list;
+                        var count = list.length;
+                        for (var j = 0; j < count; j++) {
+                            var json = list[j];
+                            var account = json.account;
+                            var token = json.token;
+
+                            //登录
+                            var nim = NIM.getInstance({
+                                appKey: '09a92fc69ae026dea1f7a0e3b4171266',
+                                account: account,
+                                token: token,
+                                onconnect: onConnect,
+                                onwillreconnect: onWillReconnect,
+                                ondisconnect: onDisconnect,
+                                onerror: onError
+                            });
+                        }
+                    }
+                });
+            }
+
+            var loginCount = 0;
+            function onConnect() {
+                console.log('连接成功');
+                loginCount = loginCount + 1;
+                $("#divOutput").append("登录成功" + loginCount + "<br/>");
+            }
+            function onWillReconnect(obj) {
+                // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+                console.log('即将重连');
+                console.log(obj.retryCount);
+                console.log(obj.duration);
+            }
+            function onDisconnect(error) {
+                // 此时说明 SDK 处于断开状态, 开发者此时应该根据错误码提示相应的错误信息, 并且跳转到登录页面
+                console.log('丢失连接');
+                console.log(error);
+                if (error) {
+                    switch (error.code) {
+                        // 账号或者密码错误, 请跳转到登录页面并提示错误
+                        case 302:
+                            break;
+                            // 被踢, 请提示错误后跳转到登录页面
+                        case 'kicked':
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            function onError(error) {
+                console.log(error);
+            }
         });
-
-        function bind() {
-            $("#bookingSzAreaOid").change(changeArea);
-            $("#registrationAreaOid").change(changeRegistration);
-            $("#btnSubmit").click(submitForm);
-        }
-
-        //区域选择修改
-        function changeArea() {
-            $.ajax({
-                url: "GetRegistration",
-                type: "post",
-                data: { area: $("#bookingSzAreaOid").val() },
-                success: function (result) {
-                    if (result.StatusCode != 0) {
-                        return;
-                    }
-                    var html = "";
-                    $.each(result.Data, function (i, n) {
-                        $.each(n.labelList, function (j, reg) {
-                            html += '<option value="' + reg.value + '">' + reg.label + '</option>';
-                        });
-                    });
-                    $("#registrationAreaOid").html(html);
-                    changeRegistration();
-                }
-            });
-        }
-
-        //登记点选择修改
-        function changeRegistration() {
-            $.ajax({
-                url: "GetBookingInfo",
-                type: "post",
-                data: { registrationId: $("#registrationAreaOid").val() },
-                success: function (result) {
-                    if (result.StatusCode != 0) {
-                        return;
-                    }
-                    //var data = JSON.parse(result.Data);
-                    var data = result.Data;
-                    $("#registerAddress").html(data.bookingAddress);
-                    var html = "<tbody>";
-                    //预约日期
-                    html += '<tr class="label" style="height:25px;"><td>预约时段</td>';
-                    $.each(data.bookingDateInfo, function (i, n) {
-                        html += '<td>' + n.workDay + '</td>';
-                    });
-                    html += '</tr>';
-
-                    //预约时间
-                    $.each(data.bookingTimeInfo, function (i, n) {
-                        html += '<tr>';
-                        html += '<td class="label">' + n.workTimeSoltName + '</td>';
-                        //预约信息
-                        var bookingTimeInfo = data.bookingInfo[i];
-                        $.each(bookingTimeInfo, function (j, bookingInfo) {
-                            var bookingDate = bookingInfo.bookingDate;
-                            var bookingTime = bookingInfo.bookingTime;
-                            var bookingTimeId = n.workTimeSoltOid;
-                            if (bookingInfo.isEnd) {
-                                html += '<td><input type="radio" name="calendar" disabled="disabled"><span><font color="#999999">已结束</font></span></td></td>';
-                            } else if (bookingInfo.bookedCount >= bookingInfo.bookCount) {
-                                html += '<td><input type="radio" name="calendar" disabled="disabled" value="' + bookingDate + '_' + bookingTimeId + '"/><span><font color="#999999">约满</font></span></td>';
-                            } else {
-                                html += '<td><input type="radio" name="calendar" value="' + bookingDate + '_' + bookingTimeId + '" onclick="changBookingTime(\'' + bookingInfo.bookingDateLabel + '\',\'' + bookingDate + '\',' + bookingTimeId + ',\'' + bookingTime + '\');"/><span>(' + bookingInfo.bookedCount + '/' + bookingInfo.bookCount + ')</span></td>';
-                            }
-                        });
-                        html += '</tr>';
-                    });
-                    html += "</tbody>";
-                    $("#calendar_panel").html(html);
-                }
-            });
-        }
-
-        //检查输入值
-        function checkValue() {
-            var szItemNo = $("#szItemNo").val();
-            var registrationArea = $("#registrationAreaOid").val();
-            var bookingType = $("#bookingType").val();
-            var bookingDate = $("#bookingDateStr").val();
-            var workTime = $("#workTimeSoltOid").val();
-            var proveType = $("#proveType").val();
-            var proveCode = $.trim($("#proveCode").val());
-            var bookingSzAreaOid = $("#bookingSzAreaOid").val();
-            var bookingSzAreaName = $("#bookingSzAreaOid option:selected").text();
-            $("#proveCode").value = proveCode;
-            var houseName = $.trim($("#houseName").val());
-            var personName = $("#personName").val();
-            var certificateType = $("#certificateType").val();
-            var certificateNo = $.trim($("#certificateNo").val());
-            $("#certificateNo").value = certificateNo;
-            var phoneNumber = $.trim($("#phoneNumber").val());
-            $("#phoneNumber").value = phoneNumber;
-            if (!($("#bookingSzAreaOid").val() > 0)) {
-                layer.msg('请选择房地产所在区！');
-                $("#bookingSzAreaOid").focus();
-                return false;
-            }
-            if (houseName == "") {
-                layer.msg('请输入房地产名称！');
-                $("#houseName").focus();
-                return false;
-            } else if (houseName.length > 200) {
-                layer.msg('房地产名称长度最多200位！');
-                $("#houseName").focus();
-                return false;
-            }
-            if (proveType == null || proveType == "") {
-                layer.msg('请选择权属证明类型！');
-                $("#proveType").focus();
-                return false;
-            }
-            if (proveCode == null || proveCode == "") {
-                layer.msg('请输入权属证明编号！');
-                $("#proveCode").focus();
-                return false;
-            } else if (proveCode.length > 100) {
-                layer.msg('权属证明编号长度最多100位！');
-                $("#proveCode").focus();
-                return false;
-            }
-            else if (!/^\d+$/.test(proveCode)) {
-                layer.msg('权属证明编号输入不规范，如：<br/>1)深（宝）网预买字（2001）00001号，请输入200100001;<br/>2)深房地字2000541807,请输入2000541807.');
-                $("#proveCode").focus();
-                return false;
-            }
-
-            if (personName == null || personName == "") {
-                layer.msg('请输入姓名！');
-                $("#personName").focus();
-                return false;
-            } else if (personName.length > 200) {
-                layer.msg('姓名长度最多100个汉字！');
-                $("#personName").focus();
-                return false;
-            }
-            else if (!/^[\u4e00-\u9fa5]+$/.test(personName)) {
-                layer.msg('预约人姓名输入不规范！');
-                $("#personName").focus();
-                return false;
-            }
-            if (phoneNumber == null || phoneNumber == "") {
-                layer.msg('请输入手机号码！');
-                $("#phoneNumber").focus();
-                return false;
-            } else if (!/^\d{11}$/.test(phoneNumber)) {
-                layer.msg('手机号码格式不正确！');
-                $("#phoneNumber").focus();
-                return false;
-            }
-            if (certificateType == null || certificateType == "") {
-                layer.msg('请选择证件类型！');
-                $("#certificateType").focus();
-                return false;
-            }
-            if (certificateNo == null || certificateNo == "") {
-                layer.msg('请输入证件号码！');
-                $("#certificateNo").focus();
-                return false;
-            } else if (certificateNo.length > 100) {
-                layer.msg('预约申请人证件号码长度最多100位！');
-                $("#certificateNo").focus();
-                return false;
-            }
-
-            if (certificateType == "1") {
-                if (certificateNo.length != 18) {
-                    layer.msg('身份证号码长度不正确！');
-                    $("#certificateNo").focus();
-                    return false;
-                }
-                if (!validIdCode(certificateNo)) {
-                    $("#certificateNo").focus();
-                    return false;
-                }
-            }
-            if (registrationArea == null || registrationArea == "") {
-                layer.msg('请选择办理登记点！');
-                $("#registrationAreaOid").focus();
-                return false;
-            }
-            if ($("input[name='calendar']:checked") == null || $("input[name='calendar']:checked").val() == null) {
-                layer.msg('请选择预约时段！');
-                return false;
-            }
-            return true;
-        }
-
-        //提交表单
-        function submitForm() {
-            if (!checkValue()) {
-                return;
-            }
-            $("#btnSubmit").attr("disabled", "disabled");
-            $("#bookwebForm").submit();
-            //$.ajax({
-            //    url: "SubmitBookingInfo",
-            //    type: "post",
-            //    data: $("#bookwebForm").serialize(),
-            //    beforeSend: function () {
-            //        $("#btnSubmit").attr("disabled", "disabled");
-            //    },
-            //    success: function (result) {
-            //        //提交成功
-            //        if (result.StatusCode == 0) {
-
-            //        }
-            //    },
-            //    complete: function () {
-            //        $("#btnSubmit").removeAttr("disabled");
-            //    }
-            //});
-        }
-
-        function changBookingTime(bookingDateLabel, bookingDateStr, workTimeSoltOid, workTimeSoltName) {
-            $("#bookingDateStr").val(bookingDateStr);
-            $("#bookingDateLabel").val(bookingDateLabel);
-            $("#workTimeSoltOid").val(workTimeSoltOid);
-            $("#workTimeSoltName").val(workTimeSoltName);
-        }
     </script>
 </head>
 <body>
-    <div>
-        <div id="navDiv2" align="center" style="margin-top:15px;">
-            <span style="font-size:14.0pt;font-weight: bold;"> 预约申请表 </span>
-        </div>
-        <br>
-        <form name="bookwebForm" id="bookwebForm" method="post" action="Verify">
-            <input type="hidden" name="bussName" value="二手商品房转移登记（二手房买卖）" id="bussName">
-            <input type="hidden" name="itemNo" value="" id="itemNo">
-            <input type="hidden" name="szItemNo" value="30128300369555062213440300" id="szItemNo">
-            <input type="hidden" name="bookingType" value="1" id="bookingType">
-            <input type="hidden" name="bookingTypeName" value="二手商品房转移业务类" id="bookingTypeName">
-            <input type="hidden" name="bookingDateStr" value="" id="bookingDateStr">
-            <input type="hidden" name="bookingDateLabel" value="" id="bookingDateLabel">
-            <input type="hidden" name="workTimeSoltOid" value="" id="workTimeSoltOid">
-            <input type="hidden" name="workTimeSoltName" value="" id="workTimeSoltName">
-            <table class="myTable" cellpadding="0" cellspacing="0" align="center">
-                <tbody>
-                    <tr>
-                        <th colspan="8">业务信息</th>
-                    </tr>
-                    <tr>
-                        <td class="label" width="14%">业务事项</td>
-                        <td id="tempItemName" class="fromStyle" width="36%">&nbsp;二手商品房转移业务类&nbsp;---&nbsp;二手商品房转移登记（二手房买卖）</td>
-                        <td class="label" width="14%">受理单位</td>
-                        <td id="unitName" class="fromStyle" width="36%">&nbsp;深圳市不动产登记中心</td>
-                    </tr>
-                    <tr>
-                        <th colspan="4">房地产权利证明</th>
-                    </tr>
-                    <tr>
-                        <td class="label" id="fzArea">房地产所在区</td>
-                        <td class="fromStyle">
-                            <select name="bookingSzAreaOid" id="bookingSzAreaOid" class="text">
-                                <option value="0">请选择</option>
-                                <option value="1">罗湖区</option>
-                                <option value="2">福田区</option>
-                                <option value="3">南山区</option>
-                                <option value="4">宝安区</option>
-                                <option value="5">龙岗区</option>
-                                <option value="6">盐田区</option>
-                                <option value="7">光明新区</option>
-                                <option value="8">坪山新区</option>
-                                <option value="9">龙华新区</option>
-                                <option value="10">大鹏新区</option>
-                            </select>
-                        </td>
-                        <td class="label">房地产名称</td>
-                        <td height="29" class="fromStyle"><input type="text" name="houseName" size="100" value="" id="houseName" class="text"></td>
-                    </tr>
-                    <tr id="isFlagItem">
-                        <td class="label">权属证明类型</td>
-                        <td class="fromStyle">
-                            <select name="proveType" id="proveType" class="text">
-                                <option value="00">不动产登记证明或房地产证</option>
-                                <option value="01">合同</option>
-                            </select>
-                        </td>
-                        <td class="label">权属证明编号</td>
-                        <td class="fromStyle"><input type="text" name="proveCode" size="100" value="" id="proveCode" class="text"></td>
-                    </tr>
-                    <tr height="31">
-                        <th colspan="4" height="29">预约人</th>
-                    </tr>
-                    <tr height="29">
-                        <td class="label">姓名</td>
-                        <td class="fromStyle"><input type="text" name="personName" size="100" value="" id="personName" class="text"></td>
-                        <td height="29" class="label">手机</td>
-                        <td class="fromStyle"><input type="text" name="phoneNumber" size="100" value="" id="phoneNumber" class="text"></td>
-                    </tr>
-                    <tr>
-                        <td class="label">证件类型</td>
-                        <td class="fromStyle"><select name="certificateType" id="certificateType" class="text"><option value="1">二代身份证</option></select></td>
-                        <td height="29" class="label">证件号码</td>
-                        <td class="fromStyle"><input type="text" name="certificateNo" size="100" maxlength="100" value="" id="certificateNo" class="text"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
-                            <table class="myTable" id="yy" style="display: block; width: 100%;">
-                                <tbody>
-                                    <tr height="31">
-                                        <th colspan="4" height="29">办理登记点和预约时间信息</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="label" width="14%">办理登记点</td>
-                                        <td width="86%"><select name="registrationAreaOid" id="registrationAreaOid" style="width:100%;"></select></td>
-                                    </tr>
-                                    <tr id="registerAddressTr" style="">
-                                        <td class="label" width="14%">登记点地址</td>
-                                        <td colspan="3" id="registerAddress"></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <table class="myTable" id="calendar_panel" cellspacing="0" cellpadding="0" align="center" style="width: 100%;"></table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th colspan="4">现场必需材料</th>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="text-align:left;" id="need">&nbsp;&nbsp;<a href="./业务申办申请信息表_files/业务申办申请信息表.html" onclick="openWinDoc()">详见《网上办事大厅房地产权登记业务办事指南》</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <div id="nofloaterTow" align="center">
-                <button class="buttonTow" type="button" onclick="return false;">返回</button>
-                &nbsp;&nbsp;
-                <button class="buttonTow" type="button" id="btnSubmit">提交</button>
-            </div>
-            <br>
-        </form>
-    </div>
+    <div id="divOutput"></div>
 </body>
 </html>

@@ -18,7 +18,7 @@ namespace Client
             //var token = GetUserToken();
             //Console.WriteLine(token.Error);
 
-            CallApi("1b8d404d30fdc195095c23b36b6e4700");
+            CallApi("1d9376bad421fa3676ab1d0e49326d61");
             //CallApi(token.AccessToken);
             Console.ReadKey();
         }
@@ -41,6 +41,7 @@ namespace Client
         {
             var client = new HttpClient();
             client.SetBearerToken(accessToken);
+            // Aut.. Bear token
             //client.
             Console.WriteLine(client.GetStringAsync("https://localhost:44310/get_user_info").Result);
         }
