@@ -6,11 +6,14 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Linq;
+using SZHomeDLL;
 
 namespace ConsoleTest
 {
     class Program
     {
+        #region 注册查询
         /// <summary>
         /// 区域
         /// </summary>
@@ -62,19 +65,6 @@ namespace ConsoleTest
             }
         }
 
-        static void Main(string[] args)
-        {
-            decimal dd = 11.00M;
-            Console.WriteLine(dd.ToString("G"));
-            //string value = HtmlContentHelper.GetJsValueByKey("var messgeFlag = 'Y';//跳转标识     不能为空    用于判断成功还是失败", "messgeFlag");
-
-            //BookingTool.BookingToolClient client = new BookingTool.BookingToolClient();
-            //client.Booking(1);
-
-            //CancelBooking("3012830036955506221160316S04g", "11000019790225207X", "13888888887");
-
-            Console.ReadKey();
-        }
 
         private static void GetBookingInfo()
         {
@@ -425,5 +415,50 @@ namespace ConsoleTest
         /// 排序
         /// </summary>
         public int orderOfView { get; set; }
+        #endregion
+
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.Write("input phone number:");
+                string input = Console.ReadLine();
+                if (!StringHelper.IsMobilePhone(input))
+                {
+                    Console.WriteLine("phone number not validate");
+                }
+                Phone(input);
+            }
+            Console.ReadKey();
+        }
+
+        private static Random random = new Random();
+        private static void Phone(string phone)
+        {
+            //选出所有字符
+            var charDiscinctList = phone.ToCharArray().Distinct().ToList();
+            int count = charDiscinctList.Count();
+            List<char> newList = new List<char>();
+            while (true)
+            {
+                int r1 = random.Next(0, charDiscinctList.Count);
+                char c = charDiscinctList[r1];
+                if (newList.Count(m => m == c) == 0)
+                {
+                    newList.Add(c);
+                }
+                if (charDiscinctList.Count == newList.Count)
+                {
+                    break;
+                }
+            }
+            Console.WriteLine(string.Join(",", newList));
+            List<int> indexList = new List<int>();
+            foreach (var item in phone)
+            {
+                indexList.Add(newList.IndexOf(item));
+            }
+            Console.WriteLine(string.Join(",", indexList));
+        }
     }
 }
