@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTest", "WebTest\WebTest.csproj", "{2DDEA3F6-36D3-42EC-8D86-72D17E4095C5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{1C84C4FE-F5F9-44E1-BF35-732F39FD3F84}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsTest", "WindowsFormsTest\WindowsFormsTest.csproj", "{E0B58D3E-AC8E-436D-8600-C3AA48B7EC25}"
@@ -17,13 +15,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{7DF6EE78-C6B0-4032-AF08-58DD9622A536}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostWeb", "HostWeb\HostWeb.csproj", "{BD5EE1DA-AADD-4741-BE41-A010AB3DA5CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{B9FDEE5E-2784-4471-BDBD-4AAD815A840C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{030BE021-D1AE-44FB-A7B0-65C819727381}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{8017BEBD-EB6B-41E4-A9B2-11641735A078}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0FF10618-8313-4002-BD61-FE4FAA137E9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTest", "WebTest\WebTest.csproj", "{38E9CA40-4520-4B26-A2BD-4E1F74D7BCA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTest.Tests", "WebTest.Tests\WebTest.Tests.csproj", "{BF94E023-A6C9-4560-9B7D-B999E4FF066E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Leaflet", "Leaflet", "{1111CBBC-C251-413C-8681-CB2205CBB4BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeafletJs", "LeafletJs\LeafletJs.csproj", "{138FD54E-7873-4FC7-A6BA-D3A60B0A659C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeafletJs.Tests", "LeafletJs.Tests\LeafletJs.Tests.csproj", "{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +39,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2DDEA3F6-36D3-42EC-8D86-72D17E4095C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DDEA3F6-36D3-42EC-8D86-72D17E4095C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DDEA3F6-36D3-42EC-8D86-72D17E4095C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DDEA3F6-36D3-42EC-8D86-72D17E4095C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C84C4FE-F5F9-44E1-BF35-732F39FD3F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C84C4FE-F5F9-44E1-BF35-732F39FD3F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C84C4FE-F5F9-44E1-BF35-732F39FD3F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,10 +63,6 @@ Global
 		{7DF6EE78-C6B0-4032-AF08-58DD9622A536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DF6EE78-C6B0-4032-AF08-58DD9622A536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DF6EE78-C6B0-4032-AF08-58DD9622A536}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD5EE1DA-AADD-4741-BE41-A010AB3DA5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD5EE1DA-AADD-4741-BE41-A010AB3DA5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD5EE1DA-AADD-4741-BE41-A010AB3DA5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD5EE1DA-AADD-4741-BE41-A010AB3DA5CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9FDEE5E-2784-4471-BDBD-4AAD815A840C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9FDEE5E-2784-4471-BDBD-4AAD815A840C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9FDEE5E-2784-4471-BDBD-4AAD815A840C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,8 +75,30 @@ Global
 		{8017BEBD-EB6B-41E4-A9B2-11641735A078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8017BEBD-EB6B-41E4-A9B2-11641735A078}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8017BEBD-EB6B-41E4-A9B2-11641735A078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E9CA40-4520-4B26-A2BD-4E1F74D7BCA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E9CA40-4520-4B26-A2BD-4E1F74D7BCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E9CA40-4520-4B26-A2BD-4E1F74D7BCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E9CA40-4520-4B26-A2BD-4E1F74D7BCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF94E023-A6C9-4560-9B7D-B999E4FF066E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF94E023-A6C9-4560-9B7D-B999E4FF066E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF94E023-A6C9-4560-9B7D-B999E4FF066E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF94E023-A6C9-4560-9B7D-B999E4FF066E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{138FD54E-7873-4FC7-A6BA-D3A60B0A659C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138FD54E-7873-4FC7-A6BA-D3A60B0A659C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138FD54E-7873-4FC7-A6BA-D3A60B0A659C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138FD54E-7873-4FC7-A6BA-D3A60B0A659C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38E9CA40-4520-4B26-A2BD-4E1F74D7BCA5} = {0FF10618-8313-4002-BD61-FE4FAA137E9C}
+		{BF94E023-A6C9-4560-9B7D-B999E4FF066E} = {0FF10618-8313-4002-BD61-FE4FAA137E9C}
+		{138FD54E-7873-4FC7-A6BA-D3A60B0A659C} = {1111CBBC-C251-413C-8681-CB2205CBB4BB}
+		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435} = {1111CBBC-C251-413C-8681-CB2205CBB4BB}
 	EndGlobalSection
 EndGlobal

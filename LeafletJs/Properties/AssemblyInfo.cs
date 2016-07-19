@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列特性集
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("WebTest")]
+[assembly: AssemblyTitle("LeafletJs")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WebTest")]
+[assembly: AssemblyProduct("LeafletJs")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("38e9ca40-4520-4b26-a2bd-4e1f74d7bca5")]
+[assembly: Guid("138fd54e-7873-4fc7-a6ba-d3a60b0a659c")]
 
 // 程序集的版本信息由下列四个值组成:
 //

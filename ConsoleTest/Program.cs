@@ -419,6 +419,98 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
+            ServiceReference1.DongDongClient client = new ServiceReference1.DongDongClient();
+            var ss = client.TopicSearch("咚咖房学院", 0, 10);
+
+
+            //ColorConsole();
+
+            Console.ReadKey();
+        }
+
+        #region 颜色控制台
+        /// <summary>
+        /// 颜色控制台
+        /// </summary>
+        private static void ColorConsole()
+        {
+            FluentConsole.White.Background
+                .Green.Line("Hello there!");
+
+
+            var console = FluentConsole.Instance;
+            console.Blue.Line(1);
+            console.Cyan.Line(2);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 获取时间戳
+        /// </summary>
+        /// <param name="nowTime">当前时间</param>
+        /// <returns></returns>
+        public static long GetTimeStamp(DateTime nowTime)
+        {
+            return (nowTime.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        }
+
+        private static string[] Units = { "mm", "cm", "m", "in" };
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <param name="input">输入字符串</param>
+        /// <returns></returns>
+        private static string GetUnit(string input)
+        {
+            foreach (var item in Units)
+            {
+                if (input.EndsWith(item))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 验证输入
+        /// </summary>
+        private static void ValidateNumber()
+        {
+            while (true)
+            {
+                Console.Write("input:");
+                string input = Console.ReadLine();
+                input = input.ToLower();
+                string unit = GetUnit(input);
+                if (unit == null)
+                {
+                    Console.WriteLine("number not validate");
+                    continue;
+                }
+                //截取掉单位
+                input = input.Remove(input.Length - unit.Length, unit.Length);
+                decimal number = 0;
+                if (!decimal.TryParse(input, out number))
+                {
+                    Console.WriteLine("number not validate");
+                }
+                else
+                {
+                    Console.WriteLine("number validate");
+                }
+            }
+        }
+
+        private static Random random = new Random();
+
+        /// <summary>
+        /// 程序员的手机号
+        /// </summary>
+        private static void Phone()
+        {
             while (true)
             {
                 Console.Write("input phone number:");
@@ -427,38 +519,32 @@ namespace ConsoleTest
                 {
                     Console.WriteLine("phone number not validate");
                 }
-                Phone(input);
-            }
-            Console.ReadKey();
-        }
-
-        private static Random random = new Random();
-        private static void Phone(string phone)
-        {
-            //选出所有字符
-            var charDiscinctList = phone.ToCharArray().Distinct().ToList();
-            int count = charDiscinctList.Count();
-            List<char> newList = new List<char>();
-            while (true)
-            {
-                int r1 = random.Next(0, charDiscinctList.Count);
-                char c = charDiscinctList[r1];
-                if (newList.Count(m => m == c) == 0)
+                string phone = input;
+                //选出所有字符
+                var charDiscinctList = phone.ToCharArray().Distinct().ToList();
+                int count = charDiscinctList.Count();
+                List<char> newList = new List<char>();
+                while (true)
                 {
-                    newList.Add(c);
+                    int r1 = random.Next(0, charDiscinctList.Count);
+                    char c = charDiscinctList[r1];
+                    if (newList.Count(m => m == c) == 0)
+                    {
+                        newList.Add(c);
+                    }
+                    if (charDiscinctList.Count == newList.Count)
+                    {
+                        break;
+                    }
                 }
-                if (charDiscinctList.Count == newList.Count)
+                Console.WriteLine(string.Join(",", newList));
+                List<int> indexList = new List<int>();
+                foreach (var item in phone)
                 {
-                    break;
+                    indexList.Add(newList.IndexOf(item));
                 }
+                Console.WriteLine(string.Join(",", indexList));
             }
-            Console.WriteLine(string.Join(",", newList));
-            List<int> indexList = new List<int>();
-            foreach (var item in phone)
-            {
-                indexList.Add(newList.IndexOf(item));
-            }
-            Console.WriteLine(string.Join(",", indexList));
         }
     }
 }

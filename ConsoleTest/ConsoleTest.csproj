@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentConsole, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentConsole.0.8.3.0\lib\net35-Client\FluentConsole.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>lib\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
@@ -66,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Service References\BookingTool\BookingTool.wsdl" />
     <None Include="Service References\BookingTool\BookingTool.xsd">
       <SubType>Designer</SubType>
