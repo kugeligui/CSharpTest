@@ -419,10 +419,6 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            ServiceReference1.DongDongClient client = new ServiceReference1.DongDongClient();
-            var ss = client.TopicSearch("咚咖房学院", 0, 10);
-
-
             //ColorConsole();
 
             Console.ReadKey();
