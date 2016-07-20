@@ -94,10 +94,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\baidu.css" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\iis.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -106,7 +108,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gaode.html" />
     <Content Include="index.html" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -114,6 +115,7 @@
     <Content Include="scripts\geocoder\Control.Geocoder.js" />
     <Content Include="scripts\jquery\3.1.0\jquery-3.1.0.js" />
     <Content Include="scripts\jquery\3.1.0\jquery-3.1.0.min.js" />
+    <Content Include="scripts\Leaflet.AccuratePosition\Leaflet.AccuratePosition.js" />
     <Content Include="scripts\leaflet\images\layers-2x.png" />
     <Content Include="scripts\leaflet\images\layers.png" />
     <Content Include="scripts\leaflet\images\marker-icon-2x.png" />
@@ -124,13 +126,14 @@
     <Content Include="scripts\leaflet\leaflet.ChineseTmsProviders.js" />
     <Content Include="scripts\leaflet\leaflet.css" />
     <Content Include="scripts\leaflet\leaflet.js" />
+    <Content Include="scripts\myScript.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="style\" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
