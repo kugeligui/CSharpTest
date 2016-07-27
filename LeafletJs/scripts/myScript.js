@@ -3,7 +3,6 @@
 //    }
 //};
 
-
 var normalm = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {
     maxZoom: 18,
     minZoom: 5,
@@ -29,7 +28,9 @@ var baseLayers = {
 }
 
 //我的位置
-var mylocaltion = [22.72988783978288, 114.22054052352907];
+//九润大厦  (22.53705, 114.01933)
+//test22.72988783978288, 114.22054052352907
+var centerLatlng = [22.53705, 114.01933];
 
 //我的自定义图标
 var myIcon = L.icon({
@@ -40,10 +41,11 @@ var myIcon = L.icon({
 });
 
 var map = L.map("map", {
-    center: mylocaltion,
+    center: centerLatlng,
     zoom: 16,
     layers: [normal],
     zoomControl: false,
+    minZoom: 2,
     attributionControl: false
 });
 
@@ -51,6 +53,9 @@ map.findAccuratePosition({
     maxWait: 15000, // defaults to 10000
     desiredAccuracy: 30 // defaults to 20
 });
+
+//设置我的位置
+updateMyPosion(centerLatlng);
 
 //设置层
 L.control.layers(baseLayers, null).addTo(map);
@@ -67,142 +72,31 @@ L.control.attribution({
     position: 'bottomleft'
 }).addTo(map);
 
-//添加标记
-var marker = L.marker(mylocaltion,
+//添加我的位置标记
+var myPosion;
+var myPosionCircle;
+/*
+设置我的位置
+*/
+function updateMyPosion(mylocaltion) {
+    if (!!myPosion) {
+        map.removeLayer(myPosion);
+        map.removeLayer(myPosionCircle);
+    }
+    myPosion = L.marker(mylocaltion,
     {
         icon: myIcon
     }).addTo(map);
-marker.bindPopup("<b>九润大厦</b><br/>深圳市易图资讯股份有限公司");
-
-//添加我的位置范围
-var circle = L.circle(mylocaltion, 80, {
-    color: '#3385ff',
-    fillColor: '#3385ff',
-    fillOpacity: 0.1,
-    weight: 1,
-    clickable: false
-}).addTo(map);
-
-//数据（写死）
-var data = {
-    "type": "FeatureCollection",
-    "features": [
-      {
-          "type": "Feature",
-          "geometry": {
-              "type": "Polygon",
-              "coordinates": [[
-                [114.02088, 22.53877], [114.02102, 22.53881], [114.02112, 22.5388],
-                [114.02157, 22.53884], [114.02237, 22.53897],
-                [114.02253, 22.53892], [114.02277, 22.53781],
-                [114.02273, 22.53767], [114.02267, 22.53756],
-                [114.02118, 22.5373], [114.02098, 22.53742],
-                [114.02096, 22.53767], [114.02091, 22.53785],
-                [114.02087, 22.53804], [114.02081, 22.53822],
-                [114.02074, 22.53854], [114.02088, 22.53877]
-              ]]
-          },
-          "properties": {
-              "name": "东海花园",
-              "color": "red",
-              "description": "东海花园",
-              "resetStyle": ""
-          }
-      },
-      {
-          "type": "Feature",
-          "properties": {
-              "Id": 0,
-              "name": "熙龙湾",
-              "enName": "xilongwan",
-              "minZoom": 3,
-              "maxZoom": 7,
-              "imgWidth": 17263,
-              "imgHeight": 13190
-          },
-          "geometry": {
-              "type": "Polygon",
-              "coordinates": [
-                  [
-                      [113.88735015, 22.54817294],
-                      [113.88857288, 22.54841337],
-                      [113.88958339, 22.54811443],
-                      [113.89059706, 22.5476244],
-                      [113.88970218, 22.54611041],
-                      [113.88708882, 22.54721482],
-                      [113.88735015, 22.54817294]
-                  ]
-              ]
-          }
-      }, {
-          "type": "Feature",
-          "properties": {
-              "Id": 1,
-              "name": "招商依山郡",
-              "enName": "yishanjun",
-              "minZoom": 3,
-              "maxZoom": 7,
-              "imgWidth": 19867,
-              "imgHeight": 14034
-          },
-          "geometry": {
-              "type": "Polygon",
-              "coordinates": [
-                  [
-                      [114.21805375, 22.73093753],
-                      [114.220364, 22.73147023],
-                      [114.2207633, 22.73155573],
-                      [114.22320189, 22.73207528],
-                      [114.22325894, 22.7320687],
-                      [114.22330885, 22.73198978],
-                      [114.22338015, 22.73180564],
-                      [114.2235085, 22.72881986],
-                      [114.22339442, 22.72860941],
-                      [114.22319476, 22.72835949],
-                      [114.21959392, 22.72772155],
-                      [114.21896644, 22.72762948],
-                      [114.21868123, 22.7276229],
-                      [114.21839601, 22.72757029],
-                      [114.21819636, 22.72766236],
-                      [114.21811079, 22.72782678],
-                      [114.21805375, 22.73093753]
-                  ]
-              ]
-          }
-      }, {
-          "type": "Feature",
-          "properties": {
-              "Id": 0,
-              "name": "君悦龙庭",
-              "enName": "junyuelongting",
-              "minZoom": 3,
-              "maxZoom": 7,
-              "imgWidth": 14034,
-              "imgHeight": 19867
-          },
-          "geometry": {
-              "type": "Polygon",
-              "coordinates": [
-                  [
-                      [114.22174498, 22.7279214],
-                      [114.22224306, 22.72800853],
-                      [114.22268104, 22.7280719],
-                      [114.22286138, 22.72804021],
-                      [114.22317054, 22.7281115],
-                      [114.22335946, 22.72812734],
-                      [114.22342817, 22.72803229],
-                      [114.22346252, 22.72778674],
-                      [114.22347969, 22.72453915],
-                      [114.22250928, 22.72454707],
-                      [114.22186521, 22.7244837],
-                      [114.22181368, 22.72606791],
-                      [114.22174498, 22.7279214]
-                  ]
-              ]
-          }
-      }
-    ]
-};
+    //marker.bindPopup("<b>九润大厦</b><br/>深圳市易图资讯股份有限公司");
+    //添加我的位置范围
+    mylocaltion = L.circle(mylocaltion, 80, {
+        color: '#3385ff',
+        fillColor: '#3385ff',
+        fillOpacity: 0.1,
+        weight: 1,
+        clickable: false
+    }).addTo(map);
+}
 
 function highlightFeature(e) {
     var layer = e.target;
@@ -227,24 +121,46 @@ function resetHighlight(e) {
     //}
 }
 
-//设置数据
-var geojson = L.geoJson(data, {
-    style: function (feature) {
-        return {
-            color: feature.properties.color,
-        };
-    },
-    onEachFeature: function (feature, layer) {
-        //layer.bindPopup(feature.properties.description);
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: function (e) {
-                layer.bindPopup(feature.properties.description);
-            }
-        });
+//设置东海花园
+var geojson;
+$.ajax({
+    url: '/json/yitudata.json',
+    dataType: 'json',
+    success: function (data) {
+        setGeoJson(data);
     }
-}).addTo(map);
+});
+
+//设置中国城市
+$.ajax({
+    url: '/json/china_simplify.json',
+    dataType: 'json',
+    success: function (data) {
+        setGeoJson(data);
+    }
+});
+
+//设置geoJson
+function setGeoJson(data) {
+    //设置数据
+    geojson = L.geoJson(data, {
+        style: function (feature) {
+            return {
+                color: feature.properties.color,
+            };
+        },
+        onEachFeature: function (feature, layer) {
+            //layer.bindPopup(feature.properties.description);
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: function (e) {
+                    layer.bindPopup(feature.properties.description);
+                }
+            });
+        }
+    }).addTo(map);
+}
 
 
 //定位中
