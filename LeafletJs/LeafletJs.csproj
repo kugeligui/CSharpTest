@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\baidu.css" />
+    <Content Include="index2.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -5,17 +5,17 @@
 
 var normalm = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {
     maxZoom: 18,
-    minZoom: 5,
+    minZoom: 3,
     attribution: '高德地图',
 });
 var imgm = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {
     maxZoom: 18,
-    minZoom: 5,
+    minZoom: 3,
     attribution: '高德地图',
 });
 var imga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {
     maxZoom: 18,
-    minZoom: 5,
+    minZoom: 3,
     attribution: '高德地图',
 });
 
@@ -30,7 +30,7 @@ var baseLayers = {
 //我的位置
 //九润大厦  (22.53705, 114.01933)
 //test22.72988783978288, 114.22054052352907
-var centerLatlng = [22.53705, 114.01933];
+var centerLatlng = [0, 0];
 
 //我的自定义图标
 var myIcon = L.icon({
@@ -42,11 +42,12 @@ var myIcon = L.icon({
 
 var map = L.map("map", {
     center: centerLatlng,
-    zoom: 16,
+    zoom: 2,
     layers: [normal],
-    zoomControl: false,
+    //zoomControl: false,
     minZoom: 2,
-    attributionControl: false
+    maxBounds: [[-90, -180], [90, 180]],
+    //attributionControl: false
 });
 
 map.findAccuratePosition({

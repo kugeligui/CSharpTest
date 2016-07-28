@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>LeafletJs</title>
+    <link href="scripts/leaflet/leaflet.css" rel="stylesheet" />
+    <!--<link href="style/app.css" rel="stylesheet" />-->
+    <meta charset="utf-8" />
+    <style media="screen">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+
+        .myIcon {
+            background-color: #3385ff;
+            border-radius: 12px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/baidu.css">
+</head>
+<body>
+    <div id="map"></div>
+    <div id="iploc" onmouseover="" class="ipLocCont BMap_noprint anchorBR" style="position: absolute; z-index: 10; bottom: 70px; right: 10px; top: auto; left: auto;">
+        <div class="titleComm title hide">定位您的位置</div>
+        <div class="hide titleComm loading-button">定位中</div>
+        <div class="hide titleComm titleFailed">定位失败</div>
+        <div class="icon"><span class="success"></span></div>
+    </div>
+    <script src="scripts/jquery/3.1.0/jquery-3.1.0.js"></script>
+    <script src="scripts/leaflet/leaflet.js"></script>
+    <script src="scripts/leaflet/leaflet.ChineseTmsProviders.js"></script>
+    <script src="scripts/Leaflet.AccuratePosition/Leaflet.AccuratePosition.js"></script>
+    <!-- 高德地图的api -->
+    <!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=您申请的key值"></script>-->
+    <!--<script src="scripts/myScript.js"></script>-->
+    <script type="text/javascript">
+
+        //http://localhost:1234/EPSG_4326_20/0835_0320/01712012_00655628.png
+        //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'})
+        //http://localhost:1234/EPSG_4326_{z}/{x}_{y}.png
+        var yitumap = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {
+            maxZoom: 20,
+            minZoom: 1,
+            attribution: '易图资讯股份有限公司',
+        });
+        //var yitumap = L.tileLayer.wms("http://localhost:8080/geoserver/test/wms", {
+        //    layers: 'test:xilongwan1',
+        //    format: 'image/jpeg',
+        //    transparent: false,
+        //    attribution: "易图资讯股份有限公司"
+        //});
+        var centerLatlng = [0, 0];
+        var map = L.map("map", {
+            center: centerLatlng,
+            zoom: 3,
+            layers: [yitumap],
+            zoomControl: true,
+            minZoom: 3,
+            maxZoom: 20,
+            maxBounds: [[-90, -180], [90, 180]],
+            attributionControl: true
+        });
+        L.control.scale().addTo(map);
+
+        //添加地图点击事件
+        map.on('click', function (e) {
+            //console.log(e.latlng);
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent("当前点坐标" + e.latlng.toString())
+                .openOn(map);
+        });
+    </script>
+</body>
+</html>

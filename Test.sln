@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeafletJs", "LeafletJs\Leaf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeafletJs.Tests", "LeafletJs.Tests\LeafletJs.Tests.csproj", "{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileConsole", "TileConsole\TileConsole.csproj", "{3AC96241-943D-47DB-8834-B1F4A7C37E90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AC96241-943D-47DB-8834-B1F4A7C37E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC96241-943D-47DB-8834-B1F4A7C37E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC96241-943D-47DB-8834-B1F4A7C37E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC96241-943D-47DB-8834-B1F4A7C37E90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,5 +106,6 @@ Global
 		{BF94E023-A6C9-4560-9B7D-B999E4FF066E} = {0FF10618-8313-4002-BD61-FE4FAA137E9C}
 		{138FD54E-7873-4FC7-A6BA-D3A60B0A659C} = {1111CBBC-C251-413C-8681-CB2205CBB4BB}
 		{B7DCE2C4-A81E-46CA-AEA8-ED82DA26B435} = {1111CBBC-C251-413C-8681-CB2205CBB4BB}
+		{3AC96241-943D-47DB-8834-B1F4A7C37E90} = {1111CBBC-C251-413C-8681-CB2205CBB4BB}
 	EndGlobalSection
 EndGlobal
