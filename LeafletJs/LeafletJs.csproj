@@ -94,15 +94,21 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="amap.html" />
     <Content Include="css\baidu.css" />
+    <Content Include="index.html" />
     <Content Include="index2.html" />
+    <None Include="json\xilongwan\outline.json" />
+    <Content Include="openlayers.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="json\china_simplify.json" />
-    <Content Include="json\yitudata.json" />
+    <Content Include="json\estate.json" />
     <None Include="Properties\PublishProfiles\iis.pubxml" />
+    <Content Include="scripts\amap.js" />
+    <Content Include="scripts\index.js" />
     <Content Include="scripts\jquery\1.11.3\jquery.js" />
     <Content Include="scripts\jquery\1.11.3\jquery.min.js" />
     <Content Include="scripts\jquery\2.1.4\jquery.min.map" />
@@ -115,7 +121,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
+    <Content Include="index3.html" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\geocoder\Control.Geocoder.css" />
@@ -124,6 +130,13 @@
     <Content Include="scripts\jquery\2.1.4\jquery.min.js" />
     <Content Include="scripts\jquery\3.1.0\jquery-3.1.0.js" />
     <Content Include="scripts\jquery\3.1.0\jquery-3.1.0.min.js" />
+    <Content Include="scripts\layer\layer.js" />
+    <Content Include="scripts\layer\skin\default\icon-ext.png" />
+    <Content Include="scripts\layer\skin\default\icon.png" />
+    <Content Include="scripts\layer\skin\default\loading-0.gif" />
+    <Content Include="scripts\layer\skin\default\loading-1.gif" />
+    <Content Include="scripts\layer\skin\default\loading-2.gif" />
+    <Content Include="scripts\layer\skin\layer.css" />
     <Content Include="scripts\Leaflet.AccuratePosition\Leaflet.AccuratePosition.js" />
     <Content Include="scripts\leaflet\images\layers-2x.png" />
     <Content Include="scripts\leaflet\images\layers.png" />
@@ -135,7 +148,10 @@
     <Content Include="scripts\leaflet\leaflet.ChineseTmsProviders.js" />
     <Content Include="scripts\leaflet\leaflet.css" />
     <Content Include="scripts\leaflet\leaflet.js" />
+    <Content Include="scripts\rastercoords.js" />
     <Content Include="scripts\myScript.js" />
+    <Content Include="scripts\openlayers\ol.css" />
+    <Content Include="scripts\openlayers\ol.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

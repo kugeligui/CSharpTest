@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>LeafletJs</title>
+    <link href="scripts/leaflet/leaflet.css" rel="stylesheet" />
+    <!--<link href="style/app.css" rel="stylesheet" />-->
+    <meta charset="utf-8" />
+    <style media="screen">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+
+        .myIcon {
+            background-color: #3385ff;
+            border-radius: 12px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/baidu.css">
+</head>
+<body>
+    <div id="map"></div>
+    <div id="iploc" onmouseover="" class="ipLocCont BMap_noprint anchorBR" style="position: absolute; z-index: 10; bottom: 70px; right: 10px; top: auto; left: auto;">
+        <div class="titleComm title hide">定位您的位置</div>
+        <div class="hide titleComm loading-button">定位中</div>
+        <div class="hide titleComm titleFailed">定位失败</div>
+        <div class="icon"><span class="success"></span></div>
+    </div>
+    <script src="scripts/jquery/3.1.0/jquery-3.1.0.js"></script>
+    <!--<script src="scripts/jquery/1.11.3/jquery.js"></script>-->
+    <!--<script src="scripts/jquery/2.1.4/jquery.min.js"></script>-->
+    <script src="scripts/leaflet/leaflet.js"></script>
+    <script src="scripts/leaflet/leaflet.ChineseTmsProviders.js"></script>
+    <script src="scripts/Leaflet.AccuratePosition/Leaflet.AccuratePosition.js"></script>
+    <!-- 高德地图的api -->
+    <!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=您申请的key值"></script>-->
+    <script src="scripts/myScript.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+</body>
+</html>

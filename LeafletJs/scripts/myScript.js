@@ -125,7 +125,7 @@ function resetHighlight(e) {
 //设置东海花园
 var geojson;
 $.ajax({
-    url: '/json/yitudata.json',
+    url: '/json/estate.json',
     dataType: 'json',
     success: function (data) {
         setGeoJson(data);
