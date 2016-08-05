@@ -78,9 +78,9 @@
             width: 1024px;
             height: 500px;
         }
-    </style>    
+    </style>
     <link href="scripts/leaflet/leaflet.css" rel="stylesheet" />
-    <title>快速入门</title>
+    <title>高德地图</title>
 </head>
 <body>
     <div id="container"></div>
@@ -103,9 +103,9 @@
 
     <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://cdn.bootcss.com/leaflet/1.0.0-rc.1/leaflet-src.js"></script>    
-    <script src="scripts/layer/layer.js"></script>    
-    <script src="scripts/rastercoords.js"></script>    
+    <script src="http://cdn.bootcss.com/leaflet/1.0.0-rc.1/leaflet-src.js"></script>
+    <script src="scripts/layer/layer.js"></script>
+    <script src="scripts/rastercoords.js"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=7a8b0653aa05e989748f7acb197328bd"></script>
     <script src="scripts/amap.js"></script>
     <script type="text/javascript">
@@ -335,10 +335,6 @@
             }
         });
 
-        function removeSubMap() {
-
-        }
-
         //初始化自地图
         function initSubmap(dom, option) {
             if (submap === undefined) {
@@ -373,8 +369,8 @@
             var imgDir = "leaflet-0.7.3/images/";
 
             // the tile layer containing the image generated with gdal2tiles --leaflet ...
-            L.tileLayer('http://localhost:9000/tiles/' + option.enName + '/{z}/{x}/{y}.png', {
-                errorTileUrl: 'http://localhost:9000/tiles/transparent.png',
+            L.tileLayer('http://192.9.99.105:92/tiles/' + option.enName + '/{z}/{x}/{y}.png', {
+                errorTileUrl: 'http://192.9.99.105:92/tiles/transparent.png',
                 noWrap: true,
                 //minZoom: minZoom,
                 //maxZoom: maxZoom,
@@ -383,7 +379,7 @@
             }).addTo(submap);
 
             //设置多边形
-            getProjectGeoJson(rc, option);
+            //getProjectGeoJson(rc, option);
         }
 
         //显示地图
@@ -460,10 +456,10 @@
             return geojson;
         }
 
-      
+
 
         //获取楼盘geojson
-        function getProjectGeoJson(rc,props) {
+        function getProjectGeoJson(rc, props) {
             $.ajax({
                 url: '/json/' + props.enName + '/outline.json',
                 type: 'get',
@@ -480,7 +476,7 @@
                         }
                     }).addTo(submap);
                 }
-            });            
+            });
         }
 
         function style() {

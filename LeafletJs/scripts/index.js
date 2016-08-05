@@ -46,7 +46,7 @@ function init() {
 	var imgDir = "leaflet-0.7.3/images/";
 
 	// the tile layer containing the image generated with gdal2tiles --leaflet ...
-    L.tileLayer('http://localhost:9000/tiles/xilongwan/{z}/{x}/{y}.png', {
+    L.tileLayer('http://192.9.99.105:92/tiles/xilongwan/{z}/{x}/{y}.png', {
 		noWrap: true,
 		attribution: '深圳市易图咨询股份有限公司',
 	}).addTo(map);
