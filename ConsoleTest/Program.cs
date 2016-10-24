@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Linq;
 using SZHomeDLL;
+using Exceptionless;
+using System.Threading;
+using Exceptionless.Configuration;
 
 namespace ConsoleTest
 {
@@ -419,9 +422,58 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            //ColorConsole();
+            //var client = ExceptionlessClient.Default;
+            //var client = new ExceptionlessClient(c =>
+            //{
+            //    c.ApiKey = "RDvfuo8WzhVRt4lgOFAYQG160iuRbvHoFqPgrXhX";
+            //    c.ServerUrl = "http://exceptionless.szhome.com";
+            //});
+            //ExceptionlessClient.Default;
+            var client = new ExceptionlessClient("RDvfuo8WzhVRt4lgOFAYQG160iuRbvHoFqPgrXhX");
+            //System.Configuration.ConnectionStringSettings
+            //client = new ExceptionlessClient(new ExceptionlessConfiguration());
+            //Exceptionless.Configuration.SettingsManager.
 
-            Console.ReadKey();
+            //Random random = new Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                //try
+                //{
+                //    throw new Exception("test exception " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+                //}
+                //catch (Exception ex)
+                //{
+
+                //}
+
+                string str = "test exception " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffff") + "\t" + random.Next(0, 1000000);
+                Exception ex = new Exception(str);
+                ex.ToExceptionless(null, client).Submit();
+                //client.SubmitException(new Exception(str));
+                FluentConsole.Green.Line("发送异常" + i);
+                Thread.Sleep(500);
+            }
+            FluentConsole.White.Background
+          .Green.Line("完成");
+        }
+
+        public static string Click()
+        {
+            HttpWebRequest request = WebRequest.CreateHttp("http://dz.gdycjy.gov.cn/laudMessage.shtml?act=saveCadrelaueNumber");
+            request.Accept = "application/json";
+            request.ContentType = "application/x-www-form-urlencoded";
+            //将字符串转换为字节数组            
+            request.Method = "post";
+            byte[] bs = Encoding.UTF8.GetBytes("id=218");
+            using (Stream reqStream = request.GetRequestStream())
+            {
+                reqStream.Write(bs, 0, bs.Length);
+            }
+            //获取和处理响应内容
+            WebResponse response = request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string result = reader.ReadToEnd();
+            return result;
         }
 
         #region 颜色控制台

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+
+        <title>MapCruncher Mashup Sample Web Page</title>
+
+        <script src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=5" type="text/javascript"></script>
+        <script src="http://research.microsoft.com/mapcruncher/scripts/v5.5/CrunchControl.js" type="text/javascript"></script>
+        <link href="http://research.microsoft.com/mapcruncher/scripts/v5.5/LegendStyle.css" rel="stylesheet" type="text/css">
+
+        <script type="text/javascript">
+
+        var div = null;
+        var map = null;
+        var crunchedLayerManager = null;
+
+        function ToggleLayer(name, active)
+        {
+                if (active == true)
+                {
+                        crunchedLayerManager.layerList.find(name).Activate(map);
+                }
+                else
+                {
+                        crunchedLayerManager.layerList.find(name).Deactivate(map);
+                }
+        }
+
+        function searchboxactivate()
+        {
+            txt = document.getElementById('searchbox').value;
+            map.Find(txt, "");
+        }        
+
+        function GetSize()
+        {
+                var myWidth = 0, myHeight = 0;
+
+                if( typeof( window.innerWidth ) == 'number' ) {
+                    //Non-IE
+                    myWidth = window.innerWidth;
+                    myHeight = window.innerHeight;
+                } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                    //IE 6+ in 'standards compliant mode'
+                    myWidth = document.documentElement.clientWidth;
+                    myHeight = document.documentElement.clientHeight;
+                } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                    //IE 4 compatible
+                    myWidth = document.body.clientWidth;
+                    myHeight = document.body.clientHeight;
+                }
+
+                if (myWidth > 0)
+                {
+                        var result = new Array();
+                        result[0] = myWidth;
+                        result[1] = myHeight;
+                        return result;
+                }
+                else
+                {
+                        return null;
+                }
+        }
+
+        function SetMapSize()
+        {
+                var browserSize = GetSize();
+
+                var div = document.getElementById("Map");
+
+                if (browserSize != null)
+                {
+                        div.style.width = (browserSize[0] - 25) + "px";
+                        div.style.height = (browserSize[1] - 25) + "px";
+
+                }
+                else
+                {
+                        div.style.width = "800px";
+                        div.style.height = "600px";
+                }
+                div.style.overflow = "hidden";
+                div.style.position = "relative";
+
+				if (crunchedLayerManager!=null)
+				{
+					crunchedLayerManager.controlManager.UpdateControlLayout();
+				}
+        }
+
+        function MapModeChanged(e)
+        {
+                if (map.GetMapMode() == Msn.VE.MapActionMode.Mode3D &&
+                    window.location.protocol == "file:")
+                {
+                        alert("MapCruncher tiles will only display in 3D mode " +
+                        "if your map is hosted on a web server (using http://).\n" +
+                        "Currently, your tiles are coming from a local machine (file://) " +
+                        "so only 2D mode is available.");
+                }
+        }
+
+        function LoadPage()
+        {
+                SetMapSize();
+                window.onresize = SetMapSize;
+
+                map = new VEMap('Map');
+                map.LoadMap();
+                map.AttachEvent("oninitmode", MapModeChanged);
+                map.SetMapStyle('h');
+
+				crunchedLayerManager = new VE.MapCruncher.CrunchedLayerManager(map);
+				crunchedLayerManager.controlManager.AddControl(
+						"aboutDiv", "About this sample page",
+						new VE.MapCruncher.LayoutSpec("right", 10, "top", 12),
+						true, false);
+                crunchedLayerManager.ImportLayersFromAnchorHRef("CrunchedLayers");
+                var permalinkProvided = crunchedLayerManager.ApplyPermalink(document.layerCheckboxForm);
+
+                if (!permalinkProvided) {
+          var layer = crunchedLayerManager.layerList.find('NewLayer');
+                    layer.Activate(map);
+                    layer.SetDefaultView(map);
+                }
+        }
+
+        </script>
+
+</head>
+<body onload="LoadPage()">
+
+<div id="Map"></div>
+
+<div style="display:none">
+	<a id="CrunchedLayers" href="MapCruncherMetadata.xml">CrunchedLayers</a>
+</div>
+
+<div id="aboutDiv" style="background:white; width:400px; border: 2px solid #0000c0">
+<div style="padding:10px">
+<p> Welcome to your new Mashup -- powered by <a href="http://research.microsoft.com/mapcruncher/">MapCruncher</a> Beta for
+Microsoft <a href="http://local.live.com/">Virtual Earth</a>!
+This HTML file is a sample.  It demonstrates how to build a real web page that uses
+the map layer you just rendered.
+To publish this mashup, just move the whole folder to your web server.
+
+<p>
+
+
+<form action="javascript:searchboxactivate()">
+	<b>Search the map for businesses (e.g., "pizza"):</b>
+	<input id="searchbox" type="text" name="searchbox" size="20">
+	<input id="sbutton" type="button" value="Go!" onclick="javascript:searchboxactivate()">
+</form>
+
+        <form action="None" name="layerCheckboxForm">
+<b>Select Mashup Layers:</b>
+<input type="checkbox" id="checkbox:NewLayer" onClick="javascript:ToggleLayer('NewLayer', this.checked);" checked>NewLayer&nbsp;<a href="javascript:crunchedLayerManager.layerList.find('NewLayer').SetDefaultView(map);"><font size="-1">center here</font></a>&nbsp;|
+</form>
+</div>
+</div>
+
+</body>
+</html>

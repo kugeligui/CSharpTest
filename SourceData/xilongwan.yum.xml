@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<MapGrinderMashupFile Version="1.7">
+  <RenderOptions>
+    <PublishSourceData Value="True" />
+    <PermitComposition Value="True" />
+    <OutputTileType Type="png" />
+    <RenderToFile Folder="D:\test" />
+  </RenderOptions>
+  <LayerList>
+    <Layer DisplayName="New Layer" Expanded="True" SimulateTransparencyWithVEBackingLayer="" id="0">
+      <SourceMap DisplayName="xilongwan" Expanded="False" id="1">
+        <Document>
+          <FileDocument Filename="xilongwan.png" PageNumber="0" />
+        </Document>
+        <SourceMapInfo>
+          <MapFileURL url="" />
+          <MapHomePage url="" />
+          <MapDescription />
+        </SourceMapInfo>
+        <SourceMapRenderOptions MinZoom="1" MaxZoom="19" />
+        <TransparencyOptions UseDocumentTransparency="True" Enabled="True" Inverted="False">
+          <FadeOptions DefaultValue="1" />
+        </TransparencyOptions>
+        <SourceMapView locked="False">
+          <SourceMapPosition>
+            <LatLonZoom zoom="1">
+              <LatLon lat="0.0170655504600317" lon="0.926559347598129" />
+            </LatLonZoom>
+          </SourceMapPosition>
+          <ReferenceMapPosition>
+            <MapPosition>
+              <LatLonZoom zoom="12">
+                <LatLon lat="-0.00892639156544228" lon="0.012016296386726" />
+              </LatLonZoom>
+            </MapPosition>
+          </ReferenceMapPosition>
+        </SourceMapView>
+        <SnapView Context="Source">
+          <LatLonZoom zoom="1">
+            <LatLon lat="0" lon="0" />
+          </LatLonZoom>
+        </SnapView>
+        <SnapView Context="Reference">
+          <LatLonZoom zoom="1">
+            <LatLon lat="0" lon="0" />
+          </LatLonZoom>
+        </SnapView>
+        <SnapZoom Context="Source" Zoom="0" />
+        <SnapZoom Context="Reference" Zoom="0" />
+        <RegistrationDefinition WarpQuality="Automatic">
+          <PositionAssociation pinId="5" associationName="Pin5">
+            <SourcePosition>
+              <LatLonZoom zoom="20">
+                <LatLon lat="0.707357908858469" lon="-1.00644058420585E-07" />
+              </LatLonZoom>
+            </SourcePosition>
+            <GlobalPosition>
+              <LatLonZoom zoom="12">
+                <LatLon lat="0" lon="0" />
+              </LatLonZoom>
+            </GlobalPosition>
+          </PositionAssociation>
+          <PositionAssociation pinId="6" associationName="Pin6">
+            <SourcePosition>
+              <LatLonZoom zoom="12">
+                <LatLon lat="0.360815550460032" lon="0.676559347598129" />
+              </LatLonZoom>
+            </SourcePosition>
+            <GlobalPosition>
+              <LatLonZoom zoom="12">
+                <LatLon lat="-0.00892639156544228" lon="0.012016296386726" />
+              </LatLonZoom>
+            </GlobalPosition>
+          </PositionAssociation>
+        </RegistrationDefinition>
+        <RenderRegion>
+          <LatLon lat="0.707357704639435" lon="0" />
+          <LatLon lat="0" lon="0" />
+          <LatLon lat="0" lon="1" />
+          <LatLon lat="0.707357704639435" lon="1" />
+        </RenderRegion>
+        <LegendList />
+      </SourceMap>
+      <LayerView>
+        <MapPosition>
+          <LatLonZoom zoom="1">
+            <LatLon lat="0" lon="0" />
+          </LatLonZoom>
+        </MapPosition>
+      </LayerView>
+      <RenderClip />
+    </Layer>
+  </LayerList>
+  <LastView TargetId="1" />
+</MapGrinderMashupFile>

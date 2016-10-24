@@ -366,8 +366,6 @@
             // set the view on a marker ...
             submap.setView(rc.unproject([img[0] / 2, img[1] / 2]), 3);
 
-            var imgDir = "leaflet-0.7.3/images/";
-
             // the tile layer containing the image generated with gdal2tiles --leaflet ...
             L.tileLayer('http://192.9.99.105:92/tiles/' + option.enName + '/{z}/{x}/{y}.png', {
                 errorTileUrl: 'http://192.9.99.105:92/tiles/transparent.png',
